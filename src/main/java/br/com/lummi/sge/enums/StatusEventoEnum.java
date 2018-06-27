@@ -1,14 +1,16 @@
 package br.com.lummi.sge.enums;
 
 public enum StatusEventoEnum {
-	
-	A_ATRIBUIR("A Atribuir"),
-	EM_COMPLEMENTACAO("Em Complementação"),
-	ATRIBUIDO("Atribuído"),
+	PRIMEIRO_CONTATO("Primeiro Contato"),
+	CONFIRMAR_ATENDIMENTO("Confirmar Atendimento"),
+	EM_ATENDIMENTO("Em Atendimento"),
+	CONFIRMAR_ATIVACAO("Confirmar Ativação"),
+	ATIVO("Ativo"),
+	ENCERRADO("Encerrado"),
 	CANCELADO("Cancelado");
-	
+
 	private String descricao;
-	
+
 	StatusEventoEnum(String descricao) {
 		this.descricao = descricao;
 	}
@@ -17,5 +19,4 @@ public enum StatusEventoEnum {
 		return descricao;
 	}
 
-	
 }

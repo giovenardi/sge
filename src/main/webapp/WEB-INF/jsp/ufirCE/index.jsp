@@ -118,7 +118,7 @@
 								</a>
 								<c:if test="${det.status.name() eq 'A'}">
 			                      	<a href="<c:url value='/ufirCE/remove/${det.id}'/>" class="ui button" data-content="Excluir" data-position="top right">
-				                        <i class="trash outline red icon"></i>
+				                        <i class="trash alternate red icon"></i>
 				                   	</a>
 			                   	</c:if>
 		                   	</c:if>

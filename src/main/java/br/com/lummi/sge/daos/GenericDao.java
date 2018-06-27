@@ -7,78 +7,85 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 
 import br.com.lummi.sge.models.Entidade;
 
 public class GenericDao<T extends Entidade> {
 
-    @Inject
-    private EntityManager entityManager;
-	
-    protected Class<T> entityClass;
+	@Inject
+	private EntityManager entityManager;
 
-    @SuppressWarnings("unchecked")
-    public GenericDao() {
-        ParameterizedType genericSuperclass = (ParameterizedType) getClass()
-                .getGenericSuperclass();
-        this.entityClass = ((Class<T>) genericSuperclass
-                .getActualTypeArguments()[0]);
-    }
+	protected Class<T> entityClass;
 
-    public T save(final T entity) {
-    	try{
-    		EntityManager em = getEntityManager();
-    		em.persist(entity);
-    		em.flush();
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
-        return entity;
-    }
+	@SuppressWarnings("unchecked")
+	public GenericDao() {
+		ParameterizedType genericSuperclass = (ParameterizedType) getClass()
+				.getGenericSuperclass();
+		this.entityClass = ((Class<T>) genericSuperclass
+				.getActualTypeArguments()[0]);
+	}
 
-    public T getById(final Integer id) {
-    	
-    	T t = null;
-    	
-    	try{
-    		EntityManager entityManager = getEntityManager();
-        t = entityManager.find(getTypeClass(), id);
-        
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
-        
-        return t;
-    }
+	public T save(final T entity) {
+		try {
+			EntityManager em = getEntityManager();
+			em.persist(entity);
+			em.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return entity;
+	}
 
-    public T update(T entity) {
+	public T getById(final Integer id) {
+
+		T t = null;
+
+		try {
+			EntityManager entityManager = getEntityManager();
+			t = entityManager.find(getTypeClass(), id);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return t;
+	}
+
+	public T update(T entity) {
 		EntityManager entityManager = getEntityManager();
-        entityManager.merge(entity);
-        entityManager.flush();
-        return entity;
-    }
+		entityManager.merge(entity);
+		entityManager.flush();
+		return entity;
+	}
 
-    public void delete(final T entity) {
+	public void delete(final T entity) {
 		EntityManager entityManager = getEntityManager();
-        entityManager.remove(entity);
-    }
+		entityManager.remove(entity);
+		entityManager.flush();
+	}
 
-    @SuppressWarnings("unchecked")
-    public List<T> findAll() {
+	@SuppressWarnings("unchecked")
+	public List<T> findAll() {
 		EntityManager entityManager = getEntityManager();
-        return entityManager.createQuery(("FROM " + getTypeClass().getName())).getResultList();
-    }
+		return entityManager.createQuery(("FROM " + getTypeClass().getName())).getResultList();
+	}
 
-    private Class<T> getTypeClass() {
-        return entityClass;
-    }
+	@SuppressWarnings("unchecked")
+	public List<T> findAll(String orderColumn) { 
+		return getSession().createCriteria(getTypeClass()).addOrder(Order.asc(orderColumn)).list();
+	}
+
+	private Class<T> getTypeClass() {
+		return entityClass;
+	}
 
 	public Session getSession() {
 		return (Session) getEntityManager().getDelegate();
 	}
 
 	public EntityManager getEntityManager() {
-        return entityManager;
-    }
+		return entityManager;
+	}
 
 }

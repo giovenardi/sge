@@ -8,9 +8,11 @@
 		<script src="<c:url value='/assets/js/projeto.js'/>"></script>
 		<script src="<c:url value='/assets/js/pessoa.js'/>"></script>
 		<script src="<c:url value='/assets/js/planos.js'/>"></script>
+		<script src="<c:url value='/assets/js/projetoEvento.js'/>"></script>
 		<script src="<c:url value='/assets/js/cerimonial.js'/>"></script>
 		<script src="<c:url value='/assets/js/turmas.js'/>"></script>
 		<script src="<c:url value='/assets/js/formandos.js'/>"></script>
+		<script src="<c:url value='/assets/js/membros.js'/>"></script>
 	</jsp:attribute>
     <jsp:body>
 	     <div class="ui small breadcrumb">
@@ -48,7 +50,7 @@
 					</div>
 	 			<div class="three wide field">
 					<label>Gerente</label>
-					<input type="text" disabled value="${projeto.gerente.nome}" />
+					<input type="text" disabled value="${projeto.gerente.pessoa.nome}" />
 				</div>
 				</div>
 			</div>
@@ -70,6 +72,7 @@
 		<jsp:include page="turmaTab.jsp" />
 		<jsp:include page="comissaoFormaturaTab.jsp" />
 		<jsp:include page="cerimonialTab.jsp" />
+		<jsp:include page="eventosTab.jsp" />
 		<jsp:include page="planosTab.jsp" />
 		<jsp:include page="formandosTab.jsp" />
 		<jsp:include page="../pessoaFisica/tela.jsp" />

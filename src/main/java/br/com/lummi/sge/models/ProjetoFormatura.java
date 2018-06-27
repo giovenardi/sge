@@ -20,60 +20,57 @@ public abstract class ProjetoFormatura extends Projeto {
 
 	@Column(name = "numero_convites_luxo")
 	private Integer numeroConvitesLuxo;
-	
+
 	@Column(name = "numero_convites_semiluxo")
 	private Integer numeroConvitesSemiluxo;
-	
+
 	@Column(name = "numero_convites_simples")
 	private Integer numeroConvitesSimples;
-	
+
 	@Column(name = "numero_convites_online")
 	private Integer numeroConvitesOnline;
-	
+
 	@Column(name = "meta_formandos")
 	private Integer metaFormandos;
-	
-	@Column(name = "taxa_administrativa")
-	private Double taxaAdministrativa;
-	
+
 	@Column(name = "valor_ingresso_extra")
 	private Double valorIngressoExtra;
-	
+
 	@Column(name = "limite_compra_ingresso_extra")
 	private Date limiteCompraIngressoExtra;
-	
+
 	@Column(name = "valor_convite_extra")
 	private Double valorConviteExtra;
-	
+
 	@Column(name = "limite_compra_convite_extra")
 	private Date limiteCompraConviteExtra;
-	
+
 	@Column(name = "valor_porta_retrato_extra")
 	private Double valorPortaRetratoExtra;
-	
+
 	@Column(name = "limite_compra_porta_retrato_extra")
 	private Date limiteCompraPortaRetratoExtra;
-	
+
 	@Column(name = "valor_havaiana_extra")
 	private Double valorHavaianaExtra;
-	
+
 	@Column(name = "limite_compra_havaiana_extra")
 	private Date limiteCompraHavaianaExtra;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "comissao_formatura_id")
 	private ComissaoFormatura comissaoFormatura;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "orcamento_id")
 	private Orcamento orcamento;
-	
-	@OneToMany(mappedBy="projeto")
+
+	@OneToMany(mappedBy = "projeto")
 	private List<Turma> turmas;
 
 	@Transient
 	private List<Formando> formandos;
-	
+
 	public ProjetoFormatura() {
 		super();
 	}
@@ -116,14 +113,6 @@ public abstract class ProjetoFormatura extends Projeto {
 
 	public void setMetaFormandos(Integer metaFormandos) {
 		this.metaFormandos = metaFormandos;
-	}
-
-	public Double getTaxaAdministrativa() {
-		return taxaAdministrativa;
-	}
-
-	public void setTaxaAdministrativa(Double taxaAdministrativa) {
-		this.taxaAdministrativa = taxaAdministrativa;
 	}
 
 	public Double getValorIngressoExtra() {

@@ -15,10 +15,10 @@
 					<td>
                       <input id="urlContextPlano${plano.id}" value="<c:url value='/planoPagamento/excluir'/>" hidden="true" />
                       <a onclick="modalConfirmAjax(${plano.id}, removerPlano)" class="ui button icon" data-content="Excluir" data-position="top right">
-                        <i class="erase outline red icon"></i>
+                        <i class="erase alternate red icon"></i>
                       </a>
                       <a onclick="editarPlano(${plano.id})" class="ui button icon" data-content="Alterar" data-position="top right">
-                        <i class="pencil outline blue icon"></i>
+                        <i class="pencil alternate blue icon"></i>
                       </a>
 					</td>
 				</tr>

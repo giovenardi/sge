@@ -1,50 +1,78 @@
 package br.com.lummi.sge.models;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-
-/**
- * The persistent class for the cusuario database table.
- * 
- */
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
 @Entity
-@Table(name="usuario")
+@Table(name = "usuario")
 public class Usuario implements Entidade {
-	
+
 	private static final long serialVersionUID = -2262901380841528047L;
 
 	@Id
 	private Integer id;
 
-	@Column(name="assinatura")
+	@Column(name = "assinatura")
 	private byte[] assinatura;
 
-	@Column(name="rubrica")
+	@Column(name = "rubrica")
 	private byte[] rubrica;
 
-	@Column(name="login")
+	@Column(name = "login")
 	private String login;
 
-	@Column(name="senha")
+	@Column(name = "senha")
 	private String senha;
 
 	@Transient
 	private String confSenha;
 
-	@Column(name="token")
+	@Column(name = "token")
 	private String token;
 
-	@ManyToOne
-	@JoinColumn(name="funcionario_id")
-	private Funcionario funcionario;
+	@Transient
+	private Map<String, List<String>> permissoes;
 
 	public Usuario() {
+	}
+
+	public void adicionarPermissao(String permissao) {
+		String[] elementos = permissao.split("\\|");
+		if (elementos.length > 2) {
+			String modulo = elementos[1];
+			if (!getPermissoes().containsKey(modulo)) {
+				getPermissoes().put(modulo, new ArrayList<String>());
+			}
+			getPermissoes().get(modulo).add(permissao);
+		}
+	}
+
+	public boolean temPermissao(String permissao) {
+		String[] elementos = permissao.split("\\|");
+		return elementos.length > 2 && getPermissoes().containsKey(elementos[1])
+				&& getPermissoes().get(elementos[1]).contains(permissao);
+	}
+
+	public boolean acessaModulo(String modulo) {
+		return getPermissoes().containsKey(modulo);
+	}
+
+	public void adicionarPermissoes(List<String> permissoes) {
+		for (String permissao : permissoes) {
+			adicionarPermissao(permissao);
+		}
 	}
 
 	public Integer getId() {
@@ -103,13 +131,12 @@ public class Usuario implements Entidade {
 		this.confSenha = confSenha;
 	}
 
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public Map<String, List<String>> getPermissoes() {
+		return permissoes;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+	public void setPermissoes(Map<String, List<String>> permissoes) {
+		this.permissoes = permissoes;
 	}
 
-	
 }

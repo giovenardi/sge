@@ -1,5 +1,7 @@
 package br.com.lummi.sge.controllers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -8,8 +10,10 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.view.Results;
+import br.com.lummi.sge.exceptions.SgeValidationException;
 import br.com.lummi.sge.models.FormaCaptacao;
-import br.com.lummi.sge.models.PaginatedList;
+import br.com.lummi.sge.models.transiente.RetornoJson;
 import br.com.lummi.sge.service.FormaCaptacaoService;
 import br.com.lummi.sge.utils.Mensagens;
 
@@ -21,55 +25,48 @@ public class FormaCaptacaoController {
 	private Result result;
 	@Inject
 	private FormaCaptacaoService service;
-	
-	@Get
-    @Path({"/", ""})
-    public PaginatedList index(int page) {
-		FormaCaptacao formaCaptacao = new FormaCaptacao();
-		return index(formaCaptacao, page, 10, true);
-    }
-	
-	@Post
-	@Path({"/", ""})
-	public PaginatedList index(FormaCaptacao formaCaptacao, int page, int tamanho, boolean get) {
-		result.include("formaCaptacao", formaCaptacao);
-		if (tamanho == 0) {
-			tamanho = 10;
-		}
-		PaginatedList lista = service.findByFiltro(formaCaptacao, page, tamanho);
 
-		if (lista.getCount() == 0) {
+	@Get
+	@Path({ "/", "" })
+	public List<FormaCaptacao> index() {
+		List<FormaCaptacao> lista = service.all("nome");
+		if (lista.isEmpty()) {
 			result.include("warning", Mensagens.MSG_NENHUM_REGISTRO);
 		}
-		
 		return lista;
 	}
 
-	@Get
-	@Path({"/nova","/nova/"})
-	public void nova() {
-	}
-	
 	@Post
-    @Path("/novo")
+	@Path("/salvar")
 	@Transactional
-    public void novo(FormaCaptacao formaCaptacao) {
-		service.create(formaCaptacao);
-		result.redirectTo(this).index(0);
-    }
+	public void salvar(FormaCaptacao formaCaptacao) {
+		RetornoJson<FormaCaptacao> retornoJson = new RetornoJson<FormaCaptacao>();
+		try {
+			if (formaCaptacao.getId() == null) {
+				service.novo(formaCaptacao);
+				retornoJson.setSuccess(Mensagens.MSG_INCLUSAO_OK);
+			} else {
+				service.alterar(formaCaptacao);
+				retornoJson.setSuccess(Mensagens.MSG_EDICAO_OK);
+			}
+			retornoJson.setObj(formaCaptacao);
+			result.use(Results.json()).from(retornoJson).include("?obj").serialize();
+		} catch (SgeValidationException e) {
+			retornoJson.setWarning(e.getMessage());
+		}
+	}
 
 	@Get
-	@Path("/alterar/{id}")
-	public FormaCaptacao alterar(Integer id) {
-		return service.getById(id);
+	@Path("/buscar")
+	public void buscar(FormaCaptacao formaCaptacao) {
+		RetornoJson<FormaCaptacao> retornoJson = new RetornoJson<FormaCaptacao>();
+		formaCaptacao = service.getById(formaCaptacao.getId());
+		if (formaCaptacao == null) {
+			retornoJson.setError(Mensagens.MSG_NENHUM_REGISTRO);
+		} else {
+			retornoJson.setObj(formaCaptacao);
+		}
+		result.use(Results.json()).from(retornoJson).include("?obj").serialize();
 	}
-	
-	@Post
-    @Path("/alterar")
-	@Transactional
-    public void alterar(FormaCaptacao formaCaptacao) {
-		service.update(formaCaptacao);
-		result.redirectTo(this).index(0);
-    }
 
 }

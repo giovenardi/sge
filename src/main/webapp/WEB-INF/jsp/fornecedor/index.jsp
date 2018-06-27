@@ -7,6 +7,8 @@
  	</jsp:attribute>
  	<jsp:attribute name="extraScripts">
  		<script src="<c:url value='/assets/js/jquery.jqpagination.js'/>"></script>
+		<script src="<c:url value='/assets/js/pessoa.js'/>"></script>
+		<script src="<c:url value='/assets/js/pessoaJuridica.js'/>"></script>
  		<script src="<c:url value='/assets/js/fornecedor.js'/>"></script>
  	</jsp:attribute>
  	<jsp:body>
@@ -16,15 +18,11 @@
  			}
  		</script>
  		<div class="ui small breadcrumb">
- 			<a href="<c:url value='/'/>" class="section">Início</a>
- 			<i class="right arrow icon divider"></i>
- 			<div class="section">Gestão Logística</div>
- 			<i class="right chevron icon divider"></i>
- 			<div class="section">Almoxarifado</div>
- 			<i class="right chevron icon divider"></i>
- 			<div class="section">Cadastro Base</div>
- 			<i class="right arrow icon divider"></i>
- 			<div class="active section">Fornecedores</div>
+			  <a href="<c:url value='/'/>" class="section">Início</a>
+			  <i class="right arrow icon divider"></i>
+			  <div class="section">Cadastro</div>
+			  <i class="right chevron icon divider"></i>
+			  <div class="active section">Fornecedores</div>
  		</div>
  		<div class="ui grid">
  			<div class="eight wide column">
@@ -32,10 +30,10 @@
 			</div>
 			<div class="eight wide column">
 				<div class="iconsTop">
-					<a class="ui blue button" href="<c:url value='/fornecedor/add'/>">Incluir</a>
+					<a class="ui blue button" id="novoFornecedor">Incluir</a>
 					<div class="pipe"></div>
 					<div class="ui icon buttons">
-						<a target="_blank" class="ui cinza button" onclick="imprimir('<c:url value='/fornecedor/imprimirLista'/>', '<c:url value='/fornecedor'/>')" data-content="Imprimir" data-position="top right"><i class="print icon"></i></a>
+						<a target="_blank" class="ui cinza button" onclick="imprimir('<c:url value='/fornecedor/imprimirLista'/>', '<c:url value='/funcionario'/>')" data-content="Imprimir" data-position="top right"><i class="print icon"></i></a>
 					</div>
 				</div>
 			</div>
@@ -47,45 +45,11 @@
 				Filtro de Pesquisa
 			</div>
 			<div class="content active">
-				<form class="ui form" action="<c:url value='/fornecedor' />" method="post" id="filterForm">
-					<div class="fields">
-						<div class="one wide field">
-							<label>CRC</label>
-							<input type="text" name="fornecedor.crc" value='${fornecedor.crc}' class="campo-form-filtro crc">
-						</div>
-						<div class="six wide field">
+				<form class="ui form" action="<c:url value='/fornecedor/' />" method="post" id="filterForm">
+					<div class="fields separador">
+				 		<div class="five wide field required">
 							<label>Nome / Razão Social</label>
-							<input type="text" maxlength="100" name="fornecedor.nome" value='${fornecedor.nome}' class="campo-form-filtro">
-						</div>
-						<div class="three wide field" id="valorPeriodo">
-							<label>Situação</label>
-							<div class="ui selection dropdown">
-								<input name="fornecedor.status" type="hidden" value="${fornecedor.status}">
-								<div class="default text">Selecione</div>
-								<i class="dropdown icon"></i>
-								<div class="menu">
-									<c:forEach items="${listaSituacoes}" var="situacao">
-										<div class="item <c:if test="${situacao.name().equals(fornecedor.status.name())}">active selected</c:if>" data-value="${situacao.name()}">${situacao.descricao}</div>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-						<div class="three wide field">
-							<label>Tipo</label>
-							<div class="ui selection dropdown tipo">
-								<input name="fornecedor.tipoPessoa" type="hidden" id="tipo" value="${fornecedor.tipoPessoa}">
-								<div class="default text">Selecione</div>
-								<i class="dropdown icon"></i>
-								<div class="menu">
-									<c:forEach items="${listaTiposPessoa}" var="tipo">
-										<div class="item <c:if test="${tipo.name().equals(fornecedor.tipoPessoa.name())}">active selected</c:if>" data-value="${tipo.name()}">${tipo.descricao}</div>
-									</c:forEach>
-								</div>
-							</div>
-						</div>
-						<div id="campocpfcnpj" class="three wide field" <c:if test="${fornecedor.tipoPessoa.name() eq null}">style="display: none"</c:if>>
-							<label id="lbcpfcnpj"><c:if test="${fornecedor.tipoPessoa.name() eq 'J'}">CNPJ</c:if><c:if test="${fornecedor.tipoPessoa.name() eq 'F'}">CPF</c:if></label>
-							<input type="text" id="cpfcnpj" name="fornecedor.cpfcnpj" value='${fornecedor.cpfcnpj}' class="campo-form-filtro <c:if test="${fornecedor.tipoPessoa.name() eq 'J'}">cnpj</c:if><c:if test="${fornecedor.tipoPessoa.name() eq 'F'}">cpf</c:if>">
+							<input type="text" maxlength="100" class="campo-form" name="fornecedor.pessoa.nome" value="${fornecedor.pessoa.nome}">
 						</div>
 					</div>
 					<br>
@@ -99,41 +63,29 @@
 		<table class="ui black unstackable table">
 			<thead class="teste">
 				<tr>
-					<th class="two wide">CRC</th>
-					<th class="five wide">Nome do Fornecedor</th>
-					<th class="three wide">CPF/CNPJ</th>
-					<th class="two wide">Tipo</th>
-					<th class="two wide">Situação</th>
+					<th class="three wide">CPF / CNPJ</th>
+					<th class="eleven wide">Nome / Razão Social</th>
 					<th class="two wide"></th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${paginatedList.currentList}" var="det" varStatus="count">
 					<tr class="cell-content-selectable">
-						<td onclick="modalLoading();location.href='<c:url value='/fornecedor/show/${det.id}'/>';">${det.crc}</td>
-						<td onclick="modalLoading();location.href='<c:url value='/fornecedor/show/${det.id}'/>';">${det.nome}</td>
-						<td onclick="modalLoading();location.href='<c:url value='/fornecedor/show/${det.id}'/>';">${det.cpfcnpj}</td>
-						<td onclick="modalLoading();location.href='<c:url value='/fornecedor/show/${det.id}'/>';">${det.tipoPessoa.descricao}</td>
-						<td onclick="modalLoading();location.href='<c:url value='/fornecedor/show/${det.id}'/>';">
-							<div class="ui label ${det.status.name()}">${det.status.descricao}</div>
-						</td>
+						<td>${det.pessoa.tipo.name() eq "PF" ? det.pessoa.cpf : det.pessoa.cnpj}</td>
+						<td>${det.pessoa.nome}</td>
 						<td>
 							<div class="ui icon buttons">
-								<c:if test="${det.status.name() eq 'A'}">
-									<a class="ui button" onclick="modalLoading();location.href='<c:url value='/fornecedor/edit/${det.id}'/>';" data-content="Editar">
-										<i class="write icon"></i>
-									</a>
-									<input id="urlContext${count.index}" value="<c:url value='/fornecedor/remove/${det.id}'/>" type="hidden" />
-									<a onclick="modalConfirm(${count.index})" class="ui button" data-content="Excluir" data-position="top right">
-										<i class="trash outline red icon"></i>
-									</a>
-								</c:if>
-							</div>
-						</td>
+								<a class="ui button" onclick="editarFornecedor(${det.id})" data-content="Alterar"> 
+								<i class="write icon"></i>
+							</a>
+						</div> 
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table> 
 		<template:paginationForFilter paginatedList="${paginatedList}" page="${param.page}" action="/fornecedor" formId="filterForm" />
+		<jsp:include page="formFornecedor.jsp" />
+		<jsp:include page="../pessoaJuridica/tela.jsp" />
+		<jsp:include page="../pessoaFisica/tela.jsp" />
 	</jsp:body>
 </template:admin>

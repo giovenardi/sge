@@ -13,7 +13,6 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import br.com.lummi.sge.exceptions.SgeValidationException;
 import br.com.lummi.sge.models.Instituicao;
-import br.com.lummi.sge.models.PlanoPagamento;
 import br.com.lummi.sge.models.UnidadeInstituicao;
 import br.com.lummi.sge.models.transiente.RetornoJson;
 import br.com.lummi.sge.service.UnidadeInstituicaoService;
@@ -25,10 +24,10 @@ public class UnidadeInstituicaoController {
 
 	@Inject
 	private UnidadeInstituicaoService service;
-	
+
 	@Inject
 	private Result result;
-	
+
 	@Post
 	@Path("/buscarPorInstituicao")
 	public void buscarPorInstituicao(Instituicao instituicao) {
@@ -37,8 +36,8 @@ public class UnidadeInstituicaoController {
 	}
 
 	@Get
-    @Path("/editar")
-    public void editar(UnidadeInstituicao unidadeInstituicao) {
+	@Path("/editar")
+	public void editar(UnidadeInstituicao unidadeInstituicao) {
 		RetornoJson<UnidadeInstituicao> retornoJson = new RetornoJson<UnidadeInstituicao>();
 		unidadeInstituicao = service.getById(unidadeInstituicao.getId());
 		if (unidadeInstituicao == null) {
@@ -46,13 +45,14 @@ public class UnidadeInstituicaoController {
 		} else {
 			retornoJson.setObj(unidadeInstituicao);
 		}
-		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.instituicao").serialize();;
+		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.instituicao").serialize();
+		;
 	}
 
 	@Post
-    @Path("/incluir")
+	@Path("/incluir")
 	@Transactional
-    public void incluir(UnidadeInstituicao unidadeInstituicao) {
+	public void incluir(UnidadeInstituicao unidadeInstituicao) {
 		RetornoJson<UnidadeInstituicao> retornoJson = new RetornoJson<UnidadeInstituicao>();
 		try {
 			validarUnidadeInstituicao(unidadeInstituicao);
@@ -67,13 +67,14 @@ public class UnidadeInstituicaoController {
 		} catch (SgeValidationException e) {
 			retornoJson.setWarning(e.getMessage());
 		}
-		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.instituicao").serialize();;
+		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.instituicao").serialize();
+		;
 	}
 
 	private void validarUnidadeInstituicao(UnidadeInstituicao unidadeInstituicao) throws SgeValidationException {
-		if (unidadeInstituicao == null 
-				|| unidadeInstituicao.getInstituicao() == null || unidadeInstituicao.getInstituicao().getId() == null
-				|| unidadeInstituicao.getNome() == null || unidadeInstituicao.getNome().length() == 0) {
+		if (unidadeInstituicao == null || unidadeInstituicao.getInstituicao() == null
+				|| unidadeInstituicao.getInstituicao().getId() == null || unidadeInstituicao.getNome() == null
+				|| unidadeInstituicao.getNome().length() == 0) {
 			throw new SgeValidationException(Mensagens.MSG_CAMPOS_OBRIGATORIOS);
 		}
 	}

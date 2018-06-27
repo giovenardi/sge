@@ -2,18 +2,10 @@
 <%@taglib tagdir="/WEB-INF/tags/template" prefix="template"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%> 
 <template:admin>
-	<jsp:attribute name="extraStyles">
-		<link rel="stylesheet" href="<c:url value='/assets/css/pagination/jqpagination.css'/>" />
- 	</jsp:attribute>
  	<jsp:attribute name="extraScripts">
- 		<script src="<c:url value='/assets/js/jquery.jqpagination.js'/>"></script>
+ 		<script src="<c:url value='/assets/js/instituicao.js'/>"></script>
  	</jsp:attribute>
  	<jsp:body>
- 		<script type="text/javascript">
- 			function limpar(){
- 				$("form").form('clear');
- 			}
- 		</script>
  		<div class="ui small breadcrumb">
 			  <a href="<c:url value='/'/>" class="section">Início</a>
 			  <i class="right arrow icon divider"></i>
@@ -27,64 +19,49 @@
 			</div>
 			<div class="eight wide column">
 				<div class="iconsTop">
-					<a class="ui blue button" href="<c:url value='/instituicao/nova'/>">Incluir</a>
+					<a class="ui blue inverted button" id="novoInstituicao">Incluir</a>
 					<div class="pipe"></div>
 					<div class="ui icon buttons">
-						<a target="_blank" class="ui cinza button" onclick="imprimir('<c:url value='/instituicao/imprimirLista'/>', '<c:url value='/instituicao'/>')" data-content="Imprimir" data-position="top right"><i class="print icon"></i></a>
+						<a target="_blank" class="ui cinza button" onclick="imprimir('<c:url value='/cargo/imprimirLista'/>', '<c:url value='/cargo'/>')" data-content="Imprimir" data-position="top right"><i class="print icon"></i></a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<hr>
-		<div class="ui styled fluid accordion">
-			<div class="active title">
-				<i class="dropdown icon"></i>
-				Filtro de Pesquisa
-			</div>
-			<div class="content active">
-				<form class="ui form" action="<c:url value='/instituicao/' />" method="post" id="filterForm">
-					<div class="fields separador">
-				 		<div class="five wide field">
-							<label>Nome</label>
-							<input type="text" maxlength="100" class="campo-form" name="instituicao.nome" value="${instituicao.nome}">
-						</div>
-				 		<div class="ten wide field">
-							<label>Nome Completo</label>
-							<input type="text" maxlength="100" class="campo-form" name="instituicao.nomeCompleto" value="${instituicao.nomeCompleto}">
-						</div>
-					</div>
-					<div class="fields">
-						<button class="ui blue button">Filtrar</button>
-						<button class="ui button gray" onclick="limpar();" type="button">Limpar</button>
-					</div>
-				</form>
-			</div>
-		</div>
 		<table class="ui black unstackable table">
 			<thead class="teste">
 				<tr>
 					<th class="two wide">Código</th>
-					<th class="four wide">Nome</th>
-					<th class="eight wide">Nome Completo</th>
+					<th class="five wide">Nome</th>
+					<th class="seven wide">Nome Completo</th>
                    	<th class="two wide"></th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${paginatedList.currentList}" var="det" varStatus="count">
-					<tr class="cell-content-selectable">
-						<td onclick="modalLoading();location.href='<c:url value='/instituicao/mostrar/${det.id}'/>';">${det.id}</td>
-						<td onclick="modalLoading();location.href='<c:url value='/instituicao/mostrar/${det.id}'/>';">${det.nome}</td>
-						<td onclick="modalLoading();location.href='<c:url value='/instituicao/mostrar/${det.id}'/>';">${det.nomeCompleto}</td>
+				<c:forEach items="${instituicaoList}" var="det" varStatus="count">
+					<tr id='instituicao${det.id}' class="cell-content-selectable">
+						<td>${det.id}</td>
+						<td>${det.nome}</td>
+						<td>${det.nomeCompleto}</td>
 						<td>
 							<div class="ui icon buttons">
-								<a class="ui button" onclick="modalLoading();location.href='<c:url value='/instituicao/alterar/${det.id}'/>';" data-content="Alterar"> 
-								<i class="write icon"></i>
-							</a>
-						</div> 
+								<a class="ui button" onclick="editarInstituicao(${det.id})" data-content="Alterar"> 
+									<i class="write icon"></i>
+								</a>
+								<a class="ui button" onclick="visualizarInstituicao(${det.id})" data-content="Visualizar"> 
+									<i class="eye icon"></i>
+								</a>
+                      			<input id="urlContextInst${det.id}" value="<c:url value='/instituicao/excluir'/>" hidden="true" />
+                      			<a id="buttonModal" onclick="modalConfirmAjax(${det.id}, removerInstituicao)" class="ui button icon" data-content="Excluir" data-position="top right">
+                        			<i class="erase alternate red icon"></i>
+                      			</a>
+							</div>
+						</td> 
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table> 
-		<template:paginationForFilter paginatedList="${paginatedList}" page="${param.page}" action="/instituicao" formId="filterForm" />
+		<jsp:include page="formInstituicao.jsp" />
+		<jsp:include page="formUnidadeInstituicao.jsp" />
 	</jsp:body>
 </template:admin>

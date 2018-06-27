@@ -1,53 +1,58 @@
 var aba = 1;
 $(document).ready(function() {
-	criarHandler();
-	mudarAba();
-	$('#btnPFPrev').on('click', function(){
-		if (validarForm('formPF')) {
-			--aba;
-			mudarAba();
-		}
-	});
-	$('#btnPFNext').on('click', function(){
-		if (validarForm('formPF')) {
-			++aba;
-			mudarAba();
-		}
-	});
-	$('#btnPFCancel').on('click', function(){
-		resetFormPF();
-		$('#modalFormando').modal('show');
-	});
-	$('#btnPFConf').on('click', function(){
-		salvarPessoa();
-	});
+	criarHandlerPF();
+//	mudarAba();
+//	$('#btnPFPrev').on('click', function(){
+//		if (validarForm('formPF')) {
+//			--aba;
+//			mudarAba();
+//		}
+//	});
+//	$('#btnPFNext').on('click', function(){
+//		if (validarForm('formPF')) {
+//			++aba;
+//			mudarAba();
+//		}
+//	});
+//	$('#btnPFCancel').on('click', function(){
+//		resetFormPF();
+////		$('#modalFormando').modal('show');
+//	});
+//	$('#btnPFConf').on('click', function(){
+//		salvarPessoa();
+//	});
 });
 
-function mudarAba() {
-	$('.step').removeClass('active');
-	$('#btnPFPrev').prop("disabled", aba == 1);
-	if (aba == 3) {
-		$('#btnPFNext').hide();
-		$('#btnPFConf').show();
-	} else {
-		$('#btnPFNext').show();
-		$('#btnPFConf').hide();
-	}
-	$('.abapessoa').hide();
-	$('#pf'+aba).show();
-	$('#selpf'+aba).addClass('active');
+function limparPF() {
+	$('#pfId').val("");
+	$('#pfNome').val("");
 }
+
+//function mudarAba() {
+//	$('.step').removeClass('active');
+//	$('#btnPFPrev').prop("disabled", aba == 1);
+//	if (aba == 3) {
+//		$('#btnPFNext').hide();
+//		$('#btnPFConf').show();
+//	} else {
+//		$('#btnPFNext').show();
+//		$('#btnPFConf').hide();
+//	}
+//	$('.abapessoa').hide();
+//	$('#pf'+aba).show();
+//	$('#selpf'+aba).addClass('active');
+//}
 
 function resetFormPF() {
 	$('#formPF').form('reset');
 	$("#cpf").val('');
 	$('#formularioPF').hide();
 	$('#selecaoPF').show();
-	aba = 1;
-	mudarAba();
+//	aba = 1;
+//	mudarAba();
 }
 
-function criarHandler() {
+function criarHandlerPF() {
 	$("#cpf").on('change', function() {
 		var cpf = $(this).val();
 		var prefixo = $('#prefixoPes').val();
@@ -71,8 +76,23 @@ function buscarPF(cpf, prefixo) {
 	});
 }
 
+function buscarPFPorId(id) {
+	$('#cpf').api('set loading');
+	var formURL = baseUrl + "pessoaFisica/buscarPorId/" + id;
+	$.ajax({
+		url : formURL,
+		type : "GET",
+		success : function(json) {
+			montarFormPF(json.retornoJson.obj);
+			$('#selecaoPF').hide();
+			$('#formularioPF').show();
+		}
+	});
+}
+
 function montarFormPF(pessoa) {
 	$('#pessoa_id').val(pessoa.id);
+	$('#pessoa_cpf').val(pessoa.cpf);
 	$('#pessoa_cpf').val(pessoa.cpf);
 	$('#pessoa_nome').val(pessoa.nome);
 	setValueSemanticDropDown($('#pessoa_sexo'), pessoa.sexo);

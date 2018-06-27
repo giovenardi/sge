@@ -25,15 +25,13 @@ public class PlanoPagamentoController {
 
 	@Inject
 	private PlanoPagamentoService service;
-	
+
 	@Inject
 	private Result result;
-	
-	
-	
+
 	@Post
-    @Path("/listar/{idProjeto}")
-    public List<PlanoPagamento> listar(Integer idProjeto) {
+	@Path("/listar/{idProjeto}")
+	public List<PlanoPagamento> listar(Integer idProjeto) {
 		List<PlanoPagamento> planos = null;
 		try {
 			planos = service.findByIdProjeto(idProjeto);
@@ -44,9 +42,9 @@ public class PlanoPagamentoController {
 	}
 
 	@Post
-    @Path("/incluir")
+	@Path("/incluir")
 	@Transactional
-    public void incluir(PlanoPagamento plano) {
+	public void incluir(PlanoPagamento plano) {
 		RetornoJson<PlanoPagamento> retornoJson = new RetornoJson<PlanoPagamento>();
 		try {
 			validarPlano(plano);
@@ -61,12 +59,13 @@ public class PlanoPagamentoController {
 		} catch (SgeValidationException e) {
 			retornoJson.setWarning(e.getMessage());
 		}
-		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.projeto").serialize();;
+		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.projeto").serialize();
+		;
 	}
 
 	@Get
-    @Path("/editar")
-    public void editar(PlanoPagamento plano) {
+	@Path("/editar")
+	public void editar(PlanoPagamento plano) {
 		RetornoJson<PlanoPagamento> retornoJson = new RetornoJson<PlanoPagamento>();
 		plano = service.getById(plano.getId());
 		if (plano == null) {
@@ -74,13 +73,15 @@ public class PlanoPagamentoController {
 		} else {
 			retornoJson.setObj(plano);
 		}
-		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.projeto", "?obj.formasPagamento").serialize();;
+		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.projeto", "?obj.formasPagamento")
+				.serialize();
+		;
 	}
 
 	@Post
-    @Path("/excluir")
+	@Path("/excluir")
 	@Transactional
-    public void excluir(PlanoPagamento plano) {
+	public void excluir(PlanoPagamento plano) {
 		RetornoJson<PlanoPagamento> retornoJson = new RetornoJson<PlanoPagamento>();
 		try {
 			plano = service.getById(plano.getId());
@@ -100,14 +101,15 @@ public class PlanoPagamentoController {
 	}
 
 	private void validarPlano(PlanoPagamento plano) throws SgeValidationException {
-		if (plano == null 
+		if (plano == null
 				|| plano.getProjeto() == null || plano.getProjeto().getId() == null
-				|| plano.getNome() == null || plano.getNome().length() == 0 
-				|| plano.getValor() == null 
-				|| plano.getConvidados() == null 
-				|| plano.getConvitesLuxo() == null 
-				|| plano.getConvitesSemiLuxo() == null 
-				|| plano.getConvitesSimples() == null) {
+				|| plano.getNome() == null || plano.getNome().length() == 0
+				|| plano.getValor() == null
+				|| plano.getConvidados() == null
+		// || plano.getConvitesLuxo() == null
+		// || plano.getConvitesSemiLuxo() == null
+		// || plano.getConvitesSimples() == null
+		) {
 			throw new SgeValidationException(Mensagens.MSG_CAMPOS_OBRIGATORIOS);
 		}
 	}

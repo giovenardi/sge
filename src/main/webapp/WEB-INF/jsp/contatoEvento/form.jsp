@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <input name="contatoEvento.id" type="hidden" value="${contatoEvento.id}">
 <input name="contatoEvento.status" type="hidden" value="${contatoEvento.status}">
 <div class="ui segment">
@@ -41,21 +42,47 @@
 				<input type="text" <c:if test='${acao eq "show"}'>disabled</c:if> maxlength="255" class="campo-form" name="contatoEvento.email" value="${contatoEvento.email}">
 			</div>
 		</div>
-		<div class="fields separador complementar" id="FORMATURA_SUPERIOR" <c:if test='${"FORMATURA_SUPERIOR" ne contatoEvento.tipoProjeto.name()}'>style="display:none"</c:if>>
-	 		<div class="five wide field <c:if test='${acao ne "show"}'>required</c:if>">
+		<div class="fields separador complementar" <c:if test='${!fn:containsIgnoreCase(contatoEvento.tipoProjeto.name(), "FORMATURA")}'>style="display:none"</c:if>>
+	 		<div class="four wide field <c:if test='${acao ne "show"}'>required</c:if>">
 				<label>Instituição</label>
-				<div class="ui selection dropdown instituicao <c:if test='${acao eq "show"}'>disabled</c:if>">
-					<input name="contatoEvento.instituicao.id" id="instituicao" class="select" type="hidden" value="${contatoEvento.instituicao.id}">
+				<div class="ui selection dropdown instituicaoTurma <c:if test='${acao eq "show"}'>disabled</c:if>">
+					<input name="contatoEvento.unidadeInstituicao.instituicao.id" id="instituicaoTurma" class="select" type="hidden" value="${contatoEvento.unidadeInstituicao.instituicao.id}">
 	  				<div class="default text">Selecione</div>
 	  				<i class="dropdown icon"></i>
 	  				<div class="menu">
 						<c:forEach items="${listaInstituicoes}" var="instituicao">
-							<div class="item <c:if test="${instituicao.id.equals(contatoEvento.instituicao.id)}">active selected</c:if>" data-value="${instituicao.id}">${instituicao.nome}</div>
+							<div class="item <c:if test="${instituicao.id.equals(contatoEvento.unidadeInstituicao.instituicao.id)}">active selected</c:if>" data-value="${instituicao.id}">${instituicao.nome}</div>
 						</c:forEach>
 	  				</div>
 	 			</div>
 			</div>
-	 		<div class="five wide field <c:if test='${acao ne "show"}'>required</c:if>">
+	 		<div class="three wide field required">
+				<label>Unidade</label>
+				<div class="ui selection dropdown unidadeInstituicao">
+					<input name="contatoEvento.unidadeInstituicao.id" id="unidadeInstituicao" class="select" type="hidden" value="${contatoEvento.unidadeInstituicao.id}">
+	  				<div class="default text">Selecione</div>
+	  				<i class="dropdown icon"></i>
+	  				<div class="menu">
+						<c:forEach items="${listaUnidades}" var="unidadeInstituicao">
+							<div class="item <c:if test="${unidadeInstituicao.id.equals(contatoEvento.unidadeInstituicao.id)}">active selected</c:if>" data-value="${unidadeInstituicao.id}">${unidadeInstituicao.nome}</div>
+						</c:forEach>
+	  				</div>
+	 			</div>
+			</div>
+	 		<div class="three wide field FORMATURA_FUNDAMENTAL_MEDIO FORMATURA_FUNDAMENTAL FORMATURA_MEDIO FORMATURA_INFANTIL <c:if test='${acao ne "show"}'>required</c:if>">
+				<label>Nível</label>
+				<div class="ui selection dropdown nivel <c:if test='${acao eq "show"}'>disabled</c:if>">
+					<input name="contatoEvento.nivel.id" id="nivel" class="select" type="hidden" value="${contatoEvento.nivel.id}">
+	  				<div class="default text">Selecione</div>
+	  				<i class="dropdown icon"></i>
+	  				<div class="menu">
+						<c:forEach items="${listaNiveis}" var="nivel">
+							<div class="item <c:if test="${nivel.name() eq contatoEvento.nivel.name()}">active selected</c:if>" data-value="${nivel.name()}">${nivel.descricao}</div>
+						</c:forEach>
+	  				</div>
+	 			</div>
+			</div>
+	 		<div class="three wide field FORMATURA_SUPERIOR <c:if test='${acao ne "show"}'>required</c:if>">
 				<label>Curso</label>
 				<div class="ui selection dropdown curso <c:if test='${acao eq "show"}'>disabled</c:if>">
 					<input name="contatoEvento.curso.id" id="curso" class="select" type="hidden" value="${contatoEvento.curso.id}">
@@ -68,9 +95,9 @@
 	  				</div>
 	 			</div>
 			</div>
-	 		<div class="three wide field <c:if test='${acao ne "show"}'>required</c:if>">
+	 		<div class="two wide field FORMATURA_SUPERIOR <c:if test='${acao ne "show"}'>required</c:if>">
 				<label>Semestre</label>
-				<div class="ui selection dropdown semestre <c:if test='${acao eq "show"}'>disabled</c:if>">
+				<div class="ui selection dropdown semestre <c:if test='${acao eq "show"}'>disabled</c:if>" style="min-width:10em!important">
 					<input name="contatoEvento.semestre" id="semestre" class="select" type="hidden" value="${contatoEvento.semestre}">
 	  				<div class="default text">Selecione</div>
 	  				<i class="dropdown icon"></i>
@@ -81,9 +108,26 @@
 	  				</div>
 	 			</div>
 			</div>
-	 		<div class="two wide field dateYYYY <c:if test='${acao ne "show"}'>required</c:if>">
+	 		<div class="one wide field dateYYYY <c:if test='${acao ne "show"}'>required</c:if>">
 				<label>Ano</label>
 				<input type="text" <c:if test='${acao eq "show"}'>disabled</c:if> class="campo-form" id="ano" name="contatoEvento.ano" value="${contatoEvento.ano}">
+			</div>
+	 		<div class="two wide field <c:if test='${acao ne "show"}'>required</c:if>">
+				<label>Turno</label>
+				<div class="ui selection dropdown turno <c:if test='${acao eq "show"}'>disabled</c:if>" style="min-width:7em!important">
+					<input name="contatoEvento.turno.id" id="turno" class="select" type="hidden" value="${contatoEvento.turno.id}">
+	  				<div class="default text">Selecione</div>
+	  				<i class="dropdown icon"></i>
+	  				<div class="menu">
+						<c:forEach items="${listaTurnos}" var="turno">
+							<div class="item <c:if test="${turno.id eq contatoEvento.turno.id}">active selected</c:if>" data-value="${turno.id}">${turno.nome}</div>
+						</c:forEach>
+	  				</div>
+	 			</div>
+			</div>
+	 		<div class="one wide field FORMATURA_SUPERIOR">
+				<label>Número</label>
+				<input type="text" <c:if test='${acao eq "show"}'>disabled</c:if> class="campo-form" id="numero" name="contatoEvento.numeroTurma" value="${contatoEvento.numeroTurma}">
 			</div>
 		</div>
 		<div class="fields separador">
@@ -100,9 +144,9 @@
 	  				</div>
 	 			</div>
 			</div>
-	 		<div class="two wide field">
+	 		<div class="three wide field">
 				<label>&nbsp;</label>
-				<div class="ui checkbox <c:if test='${acao eq "show"}'>disabled</c:if>" id="indicacao">
+				<div class="ui toggle checkbox <c:if test='${acao eq "show"}'>disabled</c:if>" id="indicacao">
 							<input type="checkbox" ${contatoEvento.houveIndicacao?'checked':''} name="contatoEvento.houveIndicacao" value="true"><label>Houve Indicação</label>
 				</div>
 			</div>

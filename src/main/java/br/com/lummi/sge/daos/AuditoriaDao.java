@@ -32,7 +32,7 @@ public class AuditoriaDao extends GenericDao<Auditoria>{
 				new StringBuffer("from Auditoria a where a.usuario.id = :usuarioId ")
 				.append("and a.acao = :acao ")
 				.append("and a.objectId = :objetoId and a.createdAt = :dataHora").toString());
-		query.setParameter("usuarioId", filtro.getUsuario().getId());
+//		query.setParameter("usuarioId", filtro.getUsuario().getId());
 		query.setParameter("acao", filtro.getAcao());
 		query.setParameter("objetoId", filtro.getIdObjeto());
 		query.setParameter("dataHora", filtro.getDataHora());
@@ -86,9 +86,9 @@ public class AuditoriaDao extends GenericDao<Auditoria>{
 			if (filtro.getAcao() != null) {
 				criteria.createAlias("acao", "acao").add(Restrictions.eq("acao.id", filtro.getAcao()));
 			}
-			if (filtro.getUsuario() != null && filtro.getUsuario().getNome() != null && !filtro.getUsuario().getNome().trim().isEmpty()) {
-				criteria.createAlias("usuario", "usuario").add(Restrictions.ilike("usuario.nome", filtro.getUsuario().getNome()+"%"));
-			}
+//			if (filtro.getUsuario() != null && filtro.getUsuario().getNome() != null && !filtro.getUsuario().getNome().trim().isEmpty()) {
+//				criteria.createAlias("usuario", "usuario").add(Restrictions.ilike("usuario.nome", filtro.getUsuario().getNome()+"%"));
+//			}
 			if (filtro.getDataInicio() != null) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(filtro.getDataInicio());

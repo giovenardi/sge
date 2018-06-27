@@ -1,5 +1,7 @@
 package br.com.lummi.sge.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,50 +10,59 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.lummi.sge.enums.NivelEnum;
 import br.com.lummi.sge.enums.SemestreEnum;
 
 @Entity
-@Table(name="turma")
+@Table(name = "turma")
 public class Turma implements Entidade {
 
 	private static final long serialVersionUID = 6159654660641980464L;
 
 	@Id
-	@SequenceGenerator(name="turma_id_seq", sequenceName="turma_id_seq", allocationSize=1)
-	@GeneratedValue(generator="turma_id_seq")
+	@SequenceGenerator(name = "turma_id_seq", sequenceName = "turma_id_seq", allocationSize = 1)
+	@GeneratedValue(generator = "turma_id_seq")
 	private Integer id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="projeto_id")
-	private ProjetoFormaturaSuperior projeto;
-	
+	@JoinColumn(name = "projeto_id")
+	private Projeto projeto;
+
 	@ManyToOne
-	@JoinColumn(name="unidade_instituicao_id")
+	@JoinColumn(name = "unidade_instituicao_id")
 	private UnidadeInstituicao unidadeInstituicao;
-	
+
 	@ManyToOne
-	@JoinColumn(name="curso_id")
+	@JoinColumn(name = "curso_id")
 	private Curso curso;
-	
-	@Column(name="semestre")
+
+	@Column(name = "nivel")
+	@Enumerated(EnumType.STRING)
+	private NivelEnum nivel;
+
+	@Column(name = "semestre")
 	@Enumerated(EnumType.ORDINAL)
 	private SemestreEnum semestre;
-	
-	@Column(name="ano")
+
+	@Column(name = "ano")
 	private Integer ano;
 
 	@ManyToOne
-	@JoinColumn(name="turno_id")
+	@JoinColumn(name = "turno_id")
 	private Turno turno;
 
-	@Column(name="numero")
+	@Column(name = "numero")
 	private Integer numero;
 
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
+
+	@OneToMany(targetEntity = Formando.class, mappedBy = "turma")
+	private List<Formando> formandos;
 
 	public Integer getId() {
 		return id;
@@ -61,11 +72,11 @@ public class Turma implements Entidade {
 		this.id = id;
 	}
 
-	public ProjetoFormaturaSuperior getProjeto() {
+	public Projeto getProjeto() {
 		return projeto;
 	}
 
-	public void setProjeto(ProjetoFormaturaSuperior projeto) {
+	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
 
@@ -124,5 +135,21 @@ public class Turma implements Entidade {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	public List<Formando> getFormandos() {
+		return formandos;
+	}
+
+	public void setFormandos(List<Formando> formandos) {
+		this.formandos = formandos;
+	}
+
+	public NivelEnum getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(NivelEnum nivel) {
+		this.nivel = nivel;
+	}
+
 }

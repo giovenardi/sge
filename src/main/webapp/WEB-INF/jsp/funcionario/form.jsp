@@ -23,11 +23,11 @@
 		  				</div>
 		 			</div>
 				</div>
-		 		<div class="two wide field <c:if test='${acao ne "show"}'>required</c:if>">
+		 		<div class="two wide field">
 					<label>CTPS</label>
 					<input type="text" <c:if test='${acao eq "show"}'>disabled</c:if> maxlength="20" class="campo-form" name="funcionario.ctps" value="${funcionario.ctps}">
 				</div>
-		 		<div class="two wide field <c:if test='${acao ne "show"}'>required</c:if>">
+		 		<div class="two wide field">
 					<label>Série CTPS</label>
 					<input type="text" <c:if test='${acao eq "show"}'>disabled</c:if> maxlength="5" class="campo-form" name="funcionario.serieCtps" value="${funcionario.serieCtps}">
 				</div>

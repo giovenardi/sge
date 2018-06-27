@@ -98,10 +98,10 @@ function montarTRPlano(obj) {
 	tr 	+= 	"	<td>";
 	tr 	+= 	"		<input id=\"urlContextPlano"+obj.id+"\" value=\"/sge/planoPagamento/excluir\" hidden=\"true\" />";
 	tr 	+= 	"		<a onclick=\"modalConfirmAjax("+obj.id+", removerPlano)\" class=\"ui button icon\" data-content=\"Excluir\" data-position=\"top right\">";
-	tr 	+= 	"		  <i class=\"erase outline red icon\"></i>";
+	tr 	+= 	"		  <i class=\"erase alternate red icon\"></i>";
 	tr 	+= 	"		</a>";
 	tr 	+= 	"    <a onclick=\"editarPlano("+obj.id+")\" class=\"ui button icon\" data-content=\"Alterar\" data-position=\"top right\">";
-	tr 	+= 	"    	<i class=\"pencil outline blue icon\"></i>";
+	tr 	+= 	"    	<i class=\"pencil alternate blue icon\"></i>";
 	tr 	+= 	"    </a>";
 	tr 	+= 	"	</td>";
 	tr 	+= 	" </tr>";
@@ -125,7 +125,7 @@ function montarTRFormaPagamento(obj) {
 	tr 	+= 	"	<td>";
     tr 	+= 	"		<input id=\"urlContextFormaPagamento"+obj.id+"\" value=\"/sge/formaPagamento/excluir\" hidden=\"true\" />";
     tr 	+= 	"		<a onclick=\"modalConfirmAjax("+obj.id+", removerFormaPagamento)\" class=\"ui button icon\" data-content=\"Excluir\" data-position=\"top right\">";
-    tr 	+= 	"		  <i class=\"erase outline red icon\"></i>";
+    tr 	+= 	"		  <i class=\"erase alternate red icon\"></i>";
     tr 	+= 	"		</a>";
     tr 	+= 	"	</td>";
 	tr 	+= 	" </tr>";

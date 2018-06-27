@@ -189,7 +189,7 @@ function validarForm(form) {
 				}
 			}
 		});
-		$(idForm + '.required input:not(.search,.date,.select,.file,.check)').each(
+		$(idForm + '.required input:not(.search,.date,.datetime,.select,.file,.check)').each(
 				function() {
 					if ($(this).is(':visible')) {
 						if ($(this).val() == '') {
@@ -224,6 +224,15 @@ function validarForm(form) {
 				if ($(this).val() == '') {
 					valida = false;
 					$(this.parentNode.parentNode).addClass('error');
+				}
+			}
+		})
+
+		$(idForm + '.required input.datetime').each(function() {
+			if ($(this).is(':visible')) {
+				if ($(this).val() == '') {
+					valida = false;
+					$(this.parentNode).addClass('error');
 				}
 			}
 		})

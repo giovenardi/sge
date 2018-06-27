@@ -15,7 +15,7 @@
 					<th class="three wide">Parcelamento</th>
 					<th class="one wide">
 						<a id="buttonNovaFormaPagamentoPlano" class="ui button icon" data-content="Nova Forma de Pagamento" data-position="top right">
-	                    	<i class="plus outline blue icon"></i>
+	                    	<i class="plus alternate blue icon"></i>
 	                    </a>
 					</th>
 				</tr>
@@ -30,7 +30,7 @@
 						<td>
 	                      <input id="urlContext${formaPagamento.id}" value="<c:url value='/formaPagamento/excluir'/>" hidden="true" />
 	                      <a id="buttonModal" onclick="modalConfirmAjax(${formaPagamento.id}, removerFormaPagamento)" class="ui button icon" data-content="Excluir" data-position="top right">
-	                        <i class="trash outline red icon"></i>
+	                        <i class="trash alternate red icon"></i>
 	                      </a>
 						</td>
 					</tr>
@@ -43,7 +43,7 @@
 						<td>
 	                      <input id="urlContext" value="<c:url value='/formaPagamento/excluir'/>" hidden="true" />
 	                      <a id="buttonModal" class="ui button icon" data-content="Excluir" data-position="top right">
-	                        <i class="trash outline red icon"></i>
+	                        <i class="trash alternate red icon"></i>
 	                      </a>
 						</td>
 					</tr>
@@ -55,7 +55,7 @@
 						<td>
 	                      <input id="urlContext" value="<c:url value='/formaPagamento/excluir'/>" hidden="true" />
 	                      <a id="buttonModal" class="ui button icon" data-content="Excluir" data-position="top right">
-	                        <i class="trash outline red icon"></i>
+	                        <i class="trash alternate red icon"></i>
 	                      </a>
 						</td>
 					</tr>
@@ -67,7 +67,7 @@
 						<td>
 	                      <input id="urlContext" value="<c:url value='/formaPagamento/excluir'/>" hidden="true" />
 	                      <a id="buttonModal" class="ui button icon" data-content="Excluir" data-position="top right">
-	                        <i class="trash outline red icon"></i>
+	                        <i class="trash alternate red icon"></i>
 	                      </a>
 						</td>
 					</tr>

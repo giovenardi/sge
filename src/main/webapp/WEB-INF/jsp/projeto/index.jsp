@@ -78,7 +78,7 @@
 						<td onclick="modalLoading();location.href='<c:url value='/projeto/show/${det.id}'/>';" title="${det.nome}" nowrap><div style="overflow:hidden; text-overflow: ellipsis">${det.nome}</div></td>
 						<td onclick="modalLoading();location.href='<c:url value='/projeto/show/${det.id}'/>';" title="${det.tipo.descricao}">${det.tipo.descricao}</td>
 						<td onclick="modalLoading();location.href='<c:url value='/projeto/show/${det.id}'/>';">${det.gerente.pessoa.nome}</td>
-						<td onclick="modalLoading();location.href='<c:url value='/projeto/show/${det.id}'/>';">${det.vendedor.pessoa.nome}</td>
+						<td onclick="modalLoading();location.href='<c:url value='/projeto/show/${det.id}'/>';">${det.contatoEvento.vendedor.pessoa.nome}</td>
 						<td onclick="modalLoading();location.href='<c:url value='/projeto/show/${det.id}'/>';">${det.status.descricao}</td>
 						<td>
 							<div class="ui icon buttons">

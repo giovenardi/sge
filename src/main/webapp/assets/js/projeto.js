@@ -1,3 +1,13 @@
+$('#taxaAdministrativa').val(($('#maskedTaxaAdministrativa').maskMoney('unmasked')[0]+"").replace('.', ','));
+$('#maskedTaxaAdministrativa').on('change', function() {
+	$('#taxaAdministrativa').val(($('#maskedTaxaAdministrativa').maskMoney('unmasked')[0]+"").replace('.', ','));
+});
+
+$('#valorIngressoExtra').val(($('#maskedValorIngressoExtra').maskMoney('unmasked')[0]+"").replace('.', ','));
+$('#maskedValorIngressoExtra').on('change', function() {
+	$('#valorIngressoExtra').val(($('#maskedValorIngressoExtra').maskMoney('unmasked')[0]+"").replace('.', ','));
+});
+
 function abrirJanela(formURL) {
 	$.ajax({
 		url : formURL,

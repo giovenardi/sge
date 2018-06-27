@@ -20,13 +20,25 @@ public class PessoaFisicaController {
 
 	@Inject
 	private Result result;
-	
+
 	@Inject
 	private PessoaFisicaService service;
 
 	@Get
-    @Path("/buscarPorCPF/{cpf}")
-    public void buscarPorCPF(String cpf) throws SgeException {
+	@Path("/buscarPorId/{id}")
+	public void buscarPorId(Integer id) throws SgeException {
+		RetornoJson<PessoaFisica> retornoJson = new RetornoJson<PessoaFisica>();
+		PessoaFisica pessoa = service.getById(id);
+		retornoJson.setObj(pessoa);
+		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.endereco", "?obj.endereco.uf",
+				"?obj.dadosBancarios", "?obj.dadosBancarios.banco").serialize();
+		;
+
+	}
+
+	@Get
+	@Path("/buscarPorCPF/{cpf}")
+	public void buscarPorCPF(String cpf) throws SgeException {
 		RetornoJson<PessoaFisica> retornoJson = new RetornoJson<PessoaFisica>();
 		PessoaFisica pessoa = service.getByCpf(cpf);
 		if (pessoa == null) {
@@ -34,9 +46,11 @@ public class PessoaFisicaController {
 			pessoa.setCpf(cpf);
 		}
 		retornoJson.setObj(pessoa);
-		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.endereco", "?obj.endereco.uf", "?obj.dadosBancarios", "?obj.dadosBancarios.banco").serialize();;
-		
-    }
+		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.endereco", "?obj.endereco.uf",
+				"?obj.dadosBancarios", "?obj.dadosBancarios.banco").serialize();
+		;
+
+	}
 
 	@Post
 	@Path("/salvar")
@@ -45,7 +59,9 @@ public class PessoaFisicaController {
 		RetornoJson<PessoaFisica> retornoJson = new RetornoJson<PessoaFisica>();
 		pessoa = service.save(pessoa);
 		retornoJson.setObj(pessoa);
-		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.endereco", "?obj.endereco.uf", "?obj.dadosBancarios", "?obj.dadosBancarios.banco").serialize();;
+		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.endereco", "?obj.endereco.uf",
+				"?obj.dadosBancarios", "?obj.dadosBancarios.banco").serialize();
+		;
 	}
 
 }

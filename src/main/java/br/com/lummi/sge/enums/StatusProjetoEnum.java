@@ -1,14 +1,12 @@
 package br.com.lummi.sge.enums;
 
 public enum StatusProjetoEnum {
-	
-	PRIMEIRO_ATENDIMENTO("Primeiro Atendimento"),
 	EM_ATENDIMENTO("Em Atendimento"),
 	ATIVO("Ativo"),
-	PERDIDO("Perdido"), 
+	PERDIDO("Perdido"),
 	CANCELADO("Cancelado"),
 	EXECUTADO("Executado");
-	
+
 	private String descricao;
 
 	private StatusProjetoEnum(String descricao) {

@@ -12,6 +12,7 @@
 				<div class="ui form">
 					<div class="fields separador">
 						<input name="turma.projeto.id" id="projetoTurmaId" type="hidden" value="${projeto.id}">
+						<input name="turma.projeto.tipo" id="projetoTurmaTipo" type="hidden" value="${projeto.tipo}">
 				 		<div class="eight wide field required">
 							<label>Instituição</label>
 							<div class="ui selection dropdown instituicaoTurma">
@@ -40,7 +41,7 @@
 						</div>
 					</div>
 					<div class="fields separador">
-				 		<div class="six wide field <c:if test='${acao ne "show"}'>required</c:if>">
+				 		<div class="six wide field FORMATURA_SUPERIOR <c:if test='${acao ne "show"}'>required</c:if>">
 							<label>Curso</label>
 							<div class="ui selection dropdown curso <c:if test='${acao eq "show"}'>disabled</c:if>">
 								<input name="turma.curso.id" id="curso" class="select" type="hidden" value="${turma.curso.id}">
@@ -53,7 +54,7 @@
 				  				</div>
 				 			</div>
 						</div>
-				 		<div class="six wide field <c:if test='${acao ne "show"}'>required</c:if>">
+				 		<div class="six wide field FORMATURA_SUPERIOR <c:if test='${acao ne "show"}'>required</c:if>">
 							<label>Semestre</label>
 							<div class="ui selection dropdown semestre <c:if test='${acao eq "show"}'>disabled</c:if>">
 								<input name="turma.semestre" id="semestre" class="select" type="hidden" value="${turma.semestre}">
@@ -62,6 +63,19 @@
 				  				<div class="menu">
 									<c:forEach items="${listaSemestres}" var="semestre">
 										<div class="item <c:if test="${semestre.ordinal() eq turma.semestre.ordinal()}">active selected</c:if>" data-value="${semestre}">${semestre.descricao}</div>
+									</c:forEach>
+				  				</div>
+				 			</div>
+						</div>
+				 		<div class="six wide field FORMATURA_FUNDAMENTAL_MEDIO FORMATURA_FUNDAMENTAL FORMATURA_MEDIO FORMATURA_INFANTIL <c:if test='${acao ne "show"}'>required</c:if>">
+							<label>Nível</label>
+							<div class="ui selection dropdown nivel <c:if test='${acao eq "show"}'>disabled</c:if>">
+								<input name="turma.nivel" id="nivel" class="select" type="hidden" value="${turma.nivel}">
+				  				<div class="default text">Selecione</div>
+				  				<i class="dropdown icon"></i>
+				  				<div class="menu">
+									<c:forEach items="${listaNiveis}" var="nivel">
+										<div class="item <c:if test="${nivel.name() eq turma.nivel.name()}">active selected</c:if>" data-value="${nivel.name()}">${nivel.descricao}</div>
 									</c:forEach>
 				  				</div>
 				 			</div>

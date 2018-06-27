@@ -22,8 +22,8 @@
 		<hr>
         <form role="form" action="<c:url value='/contatoEvento/novo'/>" method="POST" onsubmit="return validarForm()">
         	<jsp:include page="form.jsp" />
-            <a class="ui cinza button" href="javascript:history.back();">Voltar</a>
-            <button class="ui green button" type="submit">Salvar</button>
+            <a class="ui cinza button" href="<c:url value='/'/>">Voltar</a>
+            <button class="ui blue button" type="submit">Salvar</button>
         </form>
     </jsp:body>
 </template:admin>

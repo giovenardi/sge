@@ -2,27 +2,17 @@ package br.com.lummi.sge.models;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import br.com.lummi.sge.models.antigo.XBanco;
-import br.com.lummi.sge.models.antigo.XContaFinanceira;
-
 
 /**
  * The persistent class for the ccontabancaria database table.
  * 
  */
-@Entity
-@Table(name="ccontabancaria")
 public class ContaBancaria implements Entidade {
 	private static final long serialVersionUID = 1L;
 
-	@Id
 	private Integer id;
 
 	private String agencia;
@@ -35,14 +25,14 @@ public class ContaBancaria implements Entidade {
 
 	private String titular;
 
-	//bi-directional many-to-one association to Cbanco
+	// bi-directional many-to-one association to Cbanco
 	@ManyToOne
-	@JoinColumn(name="bancoid")
-	private XBanco banco;
+	@JoinColumn(name = "bancoid")
+	private Banco banco;
 
-	//bi-directional many-to-one association to Ccontafinanceira
-	@OneToMany(mappedBy="contaBancaria")
-	private List<XContaFinanceira> contasFinanceiras;
+	// bi-directional many-to-one association to Ccontafinanceira
+	@OneToMany(mappedBy = "contaBancaria")
+	private List<ContaFinanceira> contasFinanceiras;
 
 	public ContaBancaria() {
 	}
@@ -95,19 +85,19 @@ public class ContaBancaria implements Entidade {
 		this.titular = titular;
 	}
 
-	public XBanco getBanco() {
+	public Banco getBanco() {
 		return this.banco;
 	}
 
-	public void setBanco(XBanco banco) {
+	public void setBanco(Banco banco) {
 		this.banco = banco;
 	}
 
-	public List<XContaFinanceira> getContasFinanceiras() {
+	public List<ContaFinanceira> getContasFinanceiras() {
 		return this.contasFinanceiras;
 	}
 
-	public void setContasFinanceiras(List<XContaFinanceira> contasFinanceiras) {
+	public void setContasFinanceiras(List<ContaFinanceira> contasFinanceiras) {
 		this.contasFinanceiras = contasFinanceiras;
 	}
 

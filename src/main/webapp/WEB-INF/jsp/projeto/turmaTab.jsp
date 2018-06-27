@@ -15,7 +15,7 @@
 					<td>
                       <input id="urlContext${turma.id}" value="<c:url value='/turma/excluir'/>" hidden="true" />
                       <a id="buttonModal" onclick="modalConfirmAjax(${turma.id}, removerTurma)" class="ui button icon" data-content="Excluir" data-position="top right">
-                        <i class="erase outline red icon"></i>
+                        <i class="erase alternate red icon"></i>
                       </a>
 					</td>
 				</tr>

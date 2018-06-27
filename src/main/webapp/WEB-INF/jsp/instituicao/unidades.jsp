@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<table class="ui black unstackable table">
+<table id="listaUnidades" class="ui black unstackable table">
 	<thead class="teste">
 		<tr>
 			<th colspan="2" class="sixteen wide center aligned"><h2 class="ui green sub header">Unidades</h2></th>
@@ -21,10 +21,10 @@
 						<div class="ui icon buttons">
 	                   		<input id="urlContext${uni.id}" value="<c:url value='/instituicao/excluirUnidade'/>" hidden="true" />
 	                      	<a onclick="modalConfirmAjax(${uni.id}, removerUnidade)" class="ui button icon" data-content="Excluir" data-position="top right">
-		                        <i class="trash outline red icon"></i>
+		                        <i class="trash alternate red icon"></i>
 		                   	</a>
 	                      	<a onclick="editarUnidade(${uni.id})" class="ui button icon" data-content="Alterar" data-position="top right">
-		                    	<i class="pencil outline blue icon"></i>
+		                    	<i class="pencil alternate blue icon"></i>
 		                	</a>
 						</div>
 					</td> 

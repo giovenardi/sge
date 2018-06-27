@@ -12,7 +12,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import br.com.lummi.sge.exceptions.SgeException;
 import br.com.lummi.sge.exceptions.SgeValidationException;
-import br.com.lummi.sge.models.ProjetoFormaturaSuperior;
+import br.com.lummi.sge.models.ProjetoFormatura;
 import br.com.lummi.sge.models.Turma;
 import br.com.lummi.sge.models.transiente.RetornoJson;
 import br.com.lummi.sge.service.TurmaService;
@@ -24,15 +24,13 @@ public class TurmaController {
 
 	@Inject
 	private TurmaService service;
-	
+
 	@Inject
 	private Result result;
-	
-	
-	
+
 	@Post
-    @Path("/listar/{idProjeto}")
-    public List<Turma> listar(Integer idProjeto) {
+	@Path("/listar/{idProjeto}")
+	public List<Turma> listar(Integer idProjeto) {
 		List<Turma> turmas = null;
 		try {
 			turmas = service.findByIdProjeto(idProjeto);
@@ -43,9 +41,9 @@ public class TurmaController {
 	}
 
 	@Post
-    @Path("/incluir")
+	@Path("/incluir")
 	@Transactional
-    public void incluir(Turma turma) {
+	public void incluir(Turma turma) {
 		RetornoJson<Turma> retornoJson = new RetornoJson<Turma>();
 		try {
 			validarTurma(turma);
@@ -55,24 +53,29 @@ public class TurmaController {
 		} catch (SgeValidationException e) {
 			retornoJson.setWarning(e.getMessage());
 		}
-		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.projeto").serialize();;
+		result.use(Results.json()).from(retornoJson).include("?obj", "?obj.projeto").serialize();
+		;
 	}
 
 	@Post
-    @Path("/excluir")
+	@Path("/excluir")
 	@Transactional
-    public void excluir(Turma turma) {
+	public void excluir(Turma turma) {
 		RetornoJson<Turma> retornoJson = new RetornoJson<Turma>();
 		try {
 			turma = service.getById(turma.getId());
-			ProjetoFormaturaSuperior projeto = (ProjetoFormaturaSuperior) turma.getProjeto();
-			if (projeto.getTurmas().size() < 2) {
-				retornoJson.setError("Impossível excluir. O projeto deve conter pelo menos uma turma.");
+			if (turma.getFormandos() != null && turma.getFormandos().size() > 0) {
+				retornoJson.setError("Impossível excluir. Turma já possui formandos!");
 			} else {
-				service.delete(turma);
-				projeto.setNome(projeto.getNome().replaceAll(turma.getNome(), ""));
-				retornoJson.setObj(turma);
-				retornoJson.setSuccess(Mensagens.MSG_EXCLUSAO_OK);
+				ProjetoFormatura projeto = (ProjetoFormatura) turma.getProjeto();
+				if (projeto.getTurmas().size() < 2) {
+					retornoJson.setError("Impossível excluir. O projeto deve conter pelo menos uma turma.");
+				} else {
+					service.delete(turma);
+					projeto.setNome(projeto.getNome().replaceAll(turma.getNome(), ""));
+					retornoJson.setObj(turma);
+					retornoJson.setSuccess(Mensagens.MSG_EXCLUSAO_OK);
+				}
 			}
 		} catch (Exception e) {
 			retornoJson.setError(e.getMessage());
@@ -81,12 +84,12 @@ public class TurmaController {
 	}
 
 	private void validarTurma(Turma turma) throws SgeValidationException {
-		if (turma == null 
+		if (turma == null
 				|| turma.getProjeto() == null || turma.getProjeto().getId() == null
-				|| turma.getAno() == null 
-				|| turma.getCurso() == null || turma.getCurso().getId() == null 
-				|| turma.getProjeto() == null || turma.getProjeto().getId() == null 
-				|| turma.getSemestre() == null 
+				|| turma.getAno() == null
+				// || turma.getCurso() == null || turma.getCurso().getId() == null
+				|| turma.getProjeto() == null || turma.getProjeto().getId() == null
+				// || turma.getSemestre() == null
 				|| turma.getTurno() == null || turma.getTurno().getId() == null
 				|| turma.getUnidadeInstituicao() == null || turma.getUnidadeInstituicao().getId() == null) {
 			throw new SgeValidationException(Mensagens.MSG_CAMPOS_OBRIGATORIOS);

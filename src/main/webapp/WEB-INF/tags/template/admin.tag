@@ -23,6 +23,7 @@
   <!-- Biblioteca Adicionais -->		
   <link rel="stylesheet" href="<c:url value='/assets/css/bootstrap.css'/>">
   <link rel="stylesheet" href="<c:url value='/assets/css/bootstrap-datepicker.min.css'/>">
+  <link rel="stylesheet" href="<c:url value='/assets/css/bootstrap-datetimepicker.min.css'/>">
   <link rel="stylesheet" href="<c:url value='/assets/css/style.css'/>">
   <link rel="stylesheet" href="<c:url value='/assets/css/font-awesome.min.css'/>">
   <link rel="stylesheet" href="<c:url value='/assets/css/material-design-iconic-font.min.css'/>">
@@ -129,6 +130,7 @@
 						<a class="item" style="text-align: left!important" href="<c:url value='/cargo/'/>" ><span style="font-size: 12px; margin-left: 20px">Cargo</span></a>
 						<a class="item" style="text-align: left!important" href="<c:url value='/curso/'/>" ><span style="font-size: 12px; margin-left: 20px">Curso</span></a>
 						<a class="item" style="text-align: left!important" href="<c:url value='/formaCaptacao/'/>" ><span style="font-size: 12px; margin-left: 20px">Forma de Captação</span></a>
+						<a class="item" style="text-align: left!important" href="<c:url value='/evento/'/>" ><span style="font-size: 12px; margin-left: 20px">Evento</span></a>
 						<a class="item" style="text-align: left!important" href="<c:url value='/instituicao/'/>" ><span style="font-size: 12px; margin-left: 20px">Instituição</span></a>
 						<a class="item" style="text-align: left!important" href="<c:url value='/setor/'/>" ><span style="font-size: 12px; margin-left: 20px">Setor</span></a>
 						<a class="item" style="text-align: left!important" href="<c:url value='/turno/'/>" ><span style="font-size: 12px; margin-left: 20px">Turno</span></a>
@@ -139,10 +141,11 @@
 		          	</div>
 					<a class="title item" style="text-align:left;"><i class="shopping bag icon" style="float: right"></i> Comercial </a>
 		          	<div class="content">
-						<a class="item" style="text-align: left!important" href="<c:url value='/contatoEvento/aatribuir'/>" ><span style=" font-size: 12px; margin-left: 20px">Contatos não Atribuídos</span></a>
 						<a class="item" style="text-align: left!important" href="<c:url value='/contatoEvento/novo'/>" ><span style="font-size: 12px; margin-left: 20px">Novo Contato</span></a>
-						<a class="item" style="text-align: left!important" href="<c:url value='/projeto/emAtendimento'/>" ><span style="font-size: 12px; margin-left: 20px">Projetos em Atendimento</span></a>
-						<a class="item" style="text-align: left!important" href="<c:url value='/projeto/meusProjetos'/>" ><span style="font-size: 12px; margin-left: 20px">Meus Projetos</span></a>
+						<a class="item" style="text-align: left!important" href="<c:url value='/contatoEvento/primeiroContato'/>" ><span style=" font-size: 12px; margin-left: 20px">Primeiro Contato</span></a>
+						<a class="item" style="text-align: left!important" href="<c:url value='/contatoEvento/confirmacaoAtendimento'/>" ><span style="font-size: 12px; margin-left: 20px">Em Confirmação</span></a>
+						<a class="item" style="text-align: left!important" href="<c:url value='/contatoEvento/emAtendimento'/>" ><span style="font-size: 12px; margin-left: 20px">Em Atendimento</span></a>
+						<a class="item" style="text-align: left!important" href="<c:url value='/contatoEvento/confirmacaoAtivacao'/>" ><span style="font-size: 12px; margin-left: 20px">Em Confirmação</span></a>
 		          	</div>
 			        <a class="title item" style="text-align:left;"><i class="settings icon" style="float: right"></i> Gerencial </a>
 		          	<div class="content">
@@ -171,7 +174,7 @@
 		          	</div>
 		        </div>
 	        </div>
-			<div id="content" class="pusher">
+			<div id="content" class="ui segment pusher">
 							
 				<section>
 					<div class="">
@@ -187,7 +190,7 @@
 							
 							<div class="ui small basic test modal modalRemove">
 							    <div class="ui icon header">
-							      <i class="trash outline icon"></i>
+							      <i class="trash alternate icon"></i>
 							      Excluir
 							    </div>
 							    <div class="content" style="text-align: center">
@@ -389,12 +392,16 @@
 <script src="<c:url value='/assets/js/lobibox.min.js'/>" charset="UTF-8"></script>
 <script src="<c:url value='/assets/js/jquery.nanoscroller.min.js'/>" charset="UTF-8"></script>
 <script src="<c:url value='/assets/js/bootstrap.min.js'/>" charset="UTF-8"></script>
+<script src="<c:url value='/assets/js/moment.js'/>" charset="UTF-8"></script>
+<script src="<c:url value='/assets/js/pt-br.js'/>" charset="UTF-8"></script>
 <script src="<c:url value='/assets/js/bootstrap-datepicker.min.js'/>" charset="UTF-8"></script>
+<script src="<c:url value='/assets/js/bootstrap-datetimepicker.min.js'/>" charset="UTF-8"></script>
 <script src="<c:url value='/assets/js/App.min.js'/>" charset="UTF-8"></script>
 <script src="<c:url value='/assets/js/AppNavigation.js'/>" charset="UTF-8"></script>
 <script src="<c:url value='/assets/js/AppNavSearch.js'/>" charset="UTF-8"></script>
 <script src="<c:url value='/assets/js/jquery.maskedinput.js'/>" charset="UTF-8"></script>
-<script src="<c:url value='/assets/js/jquery.tablesort.min.js'/>" charset="UTF-8"></script>
+<script src="<c:url value='/assets/js/jquery.mask.min.js'/>" charset="UTF-8"></script>
+<script src="<c:url value='/assets/js/jquery-tablesort.js'/>" charset="UTF-8"></script>
 <script src="<c:url value='/assets/js/language_pt_BR.js'/>" charset="UTF-8"></script>
 <script src="<c:url value='/assets/js/jquery.maskMoney.min.js'/>"></script>
 <script src="<c:url value='/assets/js/jquery.base64.js'/>"></script>
@@ -443,6 +450,13 @@ function initComponents(){
 		}
 	});
 	
+	$('.datetime input').each(function() {
+    	$(this).datetimepicker( {
+    		locale: 'pt-br',
+    		sideBySide: true
+    	});
+	});
+
 	$('.input-daterange input').each(function() {
     	$(this).datepicker( {
     		language: 'pt-BR',
@@ -507,6 +521,18 @@ function initComponents(){
     		todayHighlight: true
     	});
 	});
+	var foneMaskBehavior = function (val) {
+		return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+	},
+	foneOptions = {
+		onKeyPress: function(val, e, field, options) {
+			field.mask(foneMaskBehavior.apply({}, arguments), options);
+		}
+	};
+
+	$('.telefone').mask(foneMaskBehavior, foneOptions);
+	$('.celular').mask(foneMaskBehavior, foneOptions);
+
 	$.mask.definitions['K'] = "[A-Za-z0-9\/\\-\]";
 	$.mask.definitions['L'] = "[A-Za-z]";
 	$('.viproc').mask('9999999/9999');
@@ -530,11 +556,10 @@ function initComponents(){
 	$('.endereco-numero').mask('9?99999');
 	$('.potencia-motor').mask('9?9999');
 	$('.cep').mask('99999-999');
-	$('.cpf').mask('999.999.999-99');
+	$('.cpf').mask('000.000.000-00', {reverse: true});
+	//  $('.cpf').mask('999.999.999-99');
 	$('.cnpj').mask("99.999.999/9999-99");
-	$('.date').mask('99/99/9999');
-	$('.telefone').mask('(99) 9999-9999?9');
-	$('.celular').mask('(99) 99999-9999?9');
+	$('.data').mask('99/99/9999');
 	$('.numdocpag').mask('9?999999999');
 	$('.form-control-capacidade').mask('9?99');
 	$('.form-control-ano').mask('9?999');

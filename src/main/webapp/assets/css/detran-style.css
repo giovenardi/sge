@@ -31,8 +31,9 @@ ul.ul-open {
 .iconsTop {
   float: right; }
   .iconsTop .pipe,
-  .iconsTop a.blue.button {
-    float: left; }
+  .iconsTop a.blue.button,
+  .iconsTop a.green.button {
+	float: left; }
   .iconsTop .pipe {
     background-color: rgba(12, 12, 12, 0.12);
     height: 36px;
@@ -57,7 +58,10 @@ button.none {
   margin-left: 3px; }
   .buttonsAccordion a#buttonModal {
     width: 37px; }
-
+.ui.modal .actions {
+	text-align: center;
+	padding: 1rem 1rem 1rem;
+}
 .ui.cinza.label {
   background-color: #D6D8D8 !important;
   color: #2E2E2E !important; }

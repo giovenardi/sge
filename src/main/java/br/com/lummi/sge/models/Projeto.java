@@ -8,6 +8,7 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,60 +24,63 @@ import javax.persistence.TemporalType;
 import br.com.lummi.sge.enums.StatusProjetoEnum;
 import br.com.lummi.sge.enums.TipoProjetoEnum;
 
-
 /**
  * The persistent class for the mprojeto database table.
  * 
  */
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo")
-@Table(name="projeto")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
+@Table(name = "projeto")
 public class Projeto implements Entidade {
 
 	private static final long serialVersionUID = -5699589916469378250L;
-	
+
 	@Id
+	@SequenceGenerator(name = "projeto_id_seq", sequenceName = "projeto_id_seq", allocationSize = 1)
+	@GeneratedValue(generator = "projeto_id_seq")
 	private Integer id;
 
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
 
-	@Column(name="tipo", updatable=false, insertable=false)
+	@Column(name = "tipo", updatable = false, insertable = false)
 	@Enumerated(EnumType.STRING)
 	private TipoProjetoEnum tipo;
 
-	@Column(name="data_criacao")
+	@Column(name = "data_criacao")
 	@Temporal(TemporalType.DATE)
 	private Date dataAtivacao;
-	
-	@Column(name="status")
+
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
 	private StatusProjetoEnum status;
-	
+
+	@Column(name = "taxa_administrativa")
+	private Double taxaAdministrativa;
+
 	@ManyToOne
-	@JoinColumn(name="contato_evento_id")
+	@JoinColumn(name = "contato_evento_id")
 	private ContatoEvento contatoEvento;
 
 	@ManyToOne
-	@JoinColumn(name="vendedor_id")
-	private Funcionario vendedor;
-
-	@ManyToOne
-	@JoinColumn(name="gerente_id")
+	@JoinColumn(name = "gerente_id")
 	private Funcionario gerente;
 
-	@OneToOne(targetEntity=Cerimonial.class, mappedBy="projeto")
+	@OneToOne(targetEntity = Cerimonial.class, mappedBy = "projeto")
 	private Cerimonial cerimonial;
 
-	@OneToMany(mappedBy="projeto")
+	@OneToMany(mappedBy = "projeto")
 	private List<AtendimentoComercial> atendimentos;
 
-	@OneToMany(targetEntity=PlanoPagamento.class, mappedBy="projeto")
+	@OneToMany(targetEntity = PlanoPagamento.class, mappedBy = "projeto")
 	private List<PlanoPagamento> planosPagamento;
 
-	@OneToMany(targetEntity=ProgramacaoFinanceiraProjeto.class, mappedBy="projeto")
+	@OneToMany(targetEntity = ProgramacaoFinanceiraProjeto.class, mappedBy = "projeto")
 	private List<ProgramacaoFinanceiraProjeto> programacoesFinanceiras;
+
+	@OneToMany(targetEntity = ProjetoEvento.class, mappedBy = "projeto")
+	private List<ProjetoEvento> eventos;
 
 	public Integer getId() {
 		return id;
@@ -133,14 +138,6 @@ public class Projeto implements Entidade {
 		this.atendimentos = atendimentos;
 	}
 
-	public Funcionario getVendedor() {
-		return vendedor;
-	}
-
-	public void setVendedor(Funcionario vendedor) {
-		this.vendedor = vendedor;
-	}
-
 	public Funcionario getGerente() {
 		return gerente;
 	}
@@ -173,5 +170,20 @@ public class Projeto implements Entidade {
 		this.cerimonial = cerimonial;
 	}
 
-	
+	public Double getTaxaAdministrativa() {
+		return taxaAdministrativa;
+	}
+
+	public void setTaxaAdministrativa(Double taxaAdministrativa) {
+		this.taxaAdministrativa = taxaAdministrativa;
+	}
+
+	public List<ProjetoEvento> getEventos() {
+		return eventos;
+	}
+
+	public void setEventos(List<ProjetoEvento> eventos) {
+		this.eventos = eventos;
+	}
+
 }

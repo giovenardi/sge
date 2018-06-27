@@ -4,68 +4,82 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import br.com.lummi.sge.enums.TipoPessoaEnum;
 
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo")
 @Entity
-@Table(name="pessoa")
+@Table(name = "pessoa")
 public class Pessoa implements Entidade {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="pessoa_id_seq", sequenceName="pessoa_id_seq", allocationSize=1)
-	@GeneratedValue(generator="pessoa_id_seq")
+	@SequenceGenerator(name = "pessoa_id_seq", sequenceName = "pessoa_id_seq", allocationSize = 1)
+	@GeneratedValue(generator = "pessoa_id_seq")
 	private Integer id;
 
-	@ManyToOne(cascade={CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinColumn(name="dado_bancario_id")
+	@Column(name = "nome")
+	private String nome;
+
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@JoinColumn(name = "dado_bancario_id")
 	private DadosBancarios dadosBancarios;
 
-	@ManyToOne(cascade={CascadeType.MERGE, CascadeType.PERSIST})
-	@JoinColumn(name="endereco_id")
+	@ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
-	@Column(name="codigo")
+	@OneToOne(targetEntity = Fornecedor.class, mappedBy = "pessoa")
+	private Fornecedor fornecedor;
+
+	@Column(name = "codigo")
 	private String codigo;
 
-	@Column(name="email_principal")
+	@Column(name = "email_principal")
 	private String emailPrincipal;
 
-	@Column(name="email_secundario")
+	@Column(name = "email_secundario")
 	private String emailSecundario;
 
-	@Column(name="fax")
+	@Column(name = "fax")
 	private String fax;
 
-	@Column(name="observacao")
+	@Column(name = "observacao")
 	private String observacao;
 
-	@Column(name="facebook")
+	@Column(name = "facebook")
 	private String facebook;
 
-	@Column(name="site")
+	@Column(name = "site")
 	private String site;
 
-	@Column(name="telefone_fixo")
+	@Column(name = "telefone_fixo")
 	private String telefoneFixo;
 
-	@Column(name="telefone_celular")
+	@Column(name = "telefone_celular")
 	private String telefoneCelular;
 
-	@Column(name="id_nextel")
+	@Column(name = "id_nextel")
 	private String idNextel;
-	
-	@Column(name="twitter")
+
+	@Column(name = "twitter")
 	private String twitter;
+
+	@Column(name = "tipo", insertable = false, updatable = false)
+	@Enumerated(EnumType.STRING)
+	private TipoPessoaEnum tipo;
 
 	public Integer getId() {
 		return id;
@@ -179,5 +193,28 @@ public class Pessoa implements Entidade {
 		this.twitter = twitter;
 	}
 
+	public TipoPessoaEnum getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoPessoaEnum tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
 
 }

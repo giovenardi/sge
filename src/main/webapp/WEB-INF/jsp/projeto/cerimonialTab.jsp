@@ -53,7 +53,7 @@
 	      	<a id="btnFormaPagamentoCerimonial" class="ui gold inverted button" href="#">
 	      		<i class="dollar icon"></i>Forma de Pagamento</a>
 			<a id="buttonGerarContratoCerimonial" onclick="gerarContratoCerimonial()" class="ui gold inverted button" data-content="Gerar Contrato" data-position="top right">
-            	<i class="file word outline icon"></i>Gerar Contrato
+            	<i class="file word alternate icon"></i>Gerar Contrato
             </a>
 		</div>
 	</form>
@@ -73,10 +73,10 @@
 				<th class="seven wide">Observação</th>
 				<th class="two wide">
 					<a id="buttonGerar" onclick="gerarProgramacao()" class="ui gold button icon" data-content="Gerar Programação Financeira" data-position="top right">
-                    	<i class="wizard outline icon"></i>
+                    	<i class="wizard alternate icon"></i>
                     </a>
 					<a id="buttonGerarBoleto" onclick="gerarBoleto()" class="ui gold button icon" data-content="Gerar Boletos" data-position="top right">
-                    	<i class="wizard outline icon"></i>
+                    	<i class="wizard alternate icon"></i>
                     </a>
 				</th>
 			</tr>
@@ -92,7 +92,7 @@
 					<td>
                       <input id="urlContext${programacao.id}" value="<c:url value='/programacaoFinanceiraProjeto/excluir'/>" hidden="true" />
                       <a id="buttonProgramacaoProjetoModal" onclick="modalConfirmAjax(${programacao.id}, removerProgramacaoProjeto)" class="ui button" data-content="Excluir" data-position="top right">
-                        <i class="erase outline red icon"></i>
+                        <i class="erase alternate red icon"></i>
                       </a>
 					</td>
 				</tr>

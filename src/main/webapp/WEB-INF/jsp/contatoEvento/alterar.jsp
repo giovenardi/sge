@@ -24,7 +24,7 @@
         	<jsp:include page="form.jsp" />
  			<br/>
             <a class="ui cinza button" href="javascript:history.back();">Voltar</a>
-            <button class="ui green button" type="submit">Salvar</button>
+            <button class="ui blue button" type="submit">Salvar</button>
         </form>
     </jsp:body>
 </template:admin>

@@ -7,6 +7,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
@@ -14,65 +15,53 @@ import javax.persistence.OneToOne;
 import br.com.lummi.sge.enums.EstadoCivilEnum;
 import br.com.lummi.sge.enums.SexoEnum;
 
-
 /**
  * The persistent class for the cpessoa database table.
  * 
  */
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorValue("PF")
 public class PessoaFisica extends Pessoa {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="nome")
-	private String nome;
-
-	@Column(name="cpf")
+	@Column(name = "cpf")
 	private String cpf;
 
-	@Column(name="rg")
+	@Column(name = "rg")
 	private String rg;
-	
-	@Column(name="titulo_eleitor")
+
+	@Column(name = "titulo_eleitor")
 	private String tituloEleitor;
-	
-	@Column(name="orgao_expedidor_rg")
+
+	@Column(name = "orgao_expedidor_rg")
 	private String orgaoExpedidorRG;
 
-	@Column(name="sexo")
+	@Column(name = "sexo")
 	@Enumerated(EnumType.STRING)
 	private SexoEnum sexo;
-	
-	@Column(name="data_nascimento")
+
+	@Column(name = "data_nascimento")
 	private Date dataNascimento;
 
-	@Column(name="estado_civil")
+	@Column(name = "estado_civil")
 	@Enumerated(EnumType.STRING)
 	private EstadoCivilEnum estadoCivil;
 
-	@Column(name="nome_mae")
+	@Column(name = "nome_mae")
 	private String nomeMae;
 
-	@Column(name="nome_pai")
+	@Column(name = "nome_pai")
 	private String nomePai;
 
-	@Column(name="foto")
+	@Column(name = "foto")
 	private byte[] foto;
 
-	@OneToOne(targetEntity=Funcionario.class, mappedBy="pessoa", optional=true)
+	@OneToOne(targetEntity = Funcionario.class, mappedBy = "pessoa", optional = true, fetch = FetchType.LAZY)
 	private Funcionario funcionario;
-	
-	@OneToOne(targetEntity=CaptadorExterno.class, mappedBy="pessoa", optional=true)
-	private CaptadorExterno captadorExterno;
-	
-	public String getNome() {
-		return nome;
-	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	@OneToOne(targetEntity = CaptadorExterno.class, mappedBy = "pessoa", optional = true)
+	private CaptadorExterno captadorExterno;
 
 	public String getCpf() {
 		return cpf;
@@ -170,5 +159,4 @@ public class PessoaFisica extends Pessoa {
 		this.captadorExterno = captadorExterno;
 	}
 
-	
 }

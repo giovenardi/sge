@@ -11,6 +11,10 @@ public abstract class GenericCRUDService<T extends Entidade> {
 		return getDao().findAll();
 	}
 
+	public List<T> all(String orderColumn) {
+		return getDao().findAll(orderColumn);
+	}
+
 	public T getById(Integer id) {
 		return getDao().getById(id);
 	}

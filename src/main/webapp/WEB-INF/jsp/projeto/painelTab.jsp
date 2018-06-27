@@ -13,19 +13,24 @@
 				</div>
 	 			<div class="two wide field">
 					<label>Vendedor</label>
-					<input type="text" disabled value="${projeto.vendedor.nome}" />
+					<input type="text" disabled value="${projeto.contatoEvento.vendedor.pessoa.nome}" />
 				</div>
 		 		<div class="three wide field">
 					<label>Tipo de Projeto</label>
-					<input type="text" disabled value="${projeto.contatoEvento.tipoProjeto.descricao}">
+					<input id="tipoProjeto" type="text" disabled value="${projeto.contatoEvento.tipoProjeto.descricao}">
 				</div>
 	 			<div class="two wide field date">
 					<label>Data Inicial</label>
-					<input type="text" value="${projeto.gerente.nome}" />
+					<input type="text" />
 				</div>
 	 			<div class="two wide field date">
 					<label>Data Final</label>
-					<input type="text" value="${projeto.gerente.nome}" />
+					<input type="text"  />
+				</div>
+	 			<div class="two wide field">
+					<label>Taxa Administrativa</label>
+					<input type="text" maxlength="18" id="maskedTaxaAdministrativa"  class="campo-form dinheiro" value="<fmt:formatNumber value='${projeto.taxaAdministrativa}' type='currency'></fmt:formatNumber>">
+					<input name="projeto.taxaAdministrativa" id="taxaAdministrativa" type="hidden" value="<fmt:formatNumber value='${projeto.taxaAdministrativa}' minFractionDigits='2' maxFractionDigits='2'></fmt:formatNumber>">
 				</div>
 			</div>
 			<div class="fields">

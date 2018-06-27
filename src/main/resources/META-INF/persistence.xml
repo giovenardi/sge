@@ -5,9 +5,6 @@
 	<persistence-unit name="default">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<non-jta-data-source>java:/comp/env/jdbc/sce_datasource</non-jta-data-source>
-		<class>br.com.lummi.sge.models.ProgramacaoFinanceira</class>
-		<class>br.com.lummi.sge.models.Formando</class>
-		<class>br.com.lummi.sge.models.PlanoPagamento</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect" />

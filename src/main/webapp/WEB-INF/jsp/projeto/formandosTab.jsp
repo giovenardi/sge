@@ -15,8 +15,9 @@
 					<td>
                       <input id="urlContextFormando${formando.id}" value="<c:url value='/formando/excluir'/>" hidden="true" />
                       <a onclick="modalConfirmAjax(${formando.id}, removerFormando)" class="ui button" data-content="Excluir" data-position="top right">
-                        <i class="trash outline red icon"></i>
+                        <i class="trash alternate red icon"></i>
                       </a>
+						<a class="ui button" onclick="editarFormando(${formando.id})" data-content="Alterar"> 
 					</td>
 				</tr>
 			</c:forEach>

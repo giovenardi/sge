@@ -11,42 +11,51 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.lummi.sge.enums.StatusFormandoEnum;
 
-
 @Entity
-@Table(name="formando")
+@Table(name = "formando")
 public class Formando implements Entidade {
 
 	private static final long serialVersionUID = -5948931292623572547L;
 
 	@Id
-	@SequenceGenerator(name="formando_id_seq", sequenceName="formando_id_seq", allocationSize=1)
-	@GeneratedValue(generator="formando_id_seq")
+	@SequenceGenerator(name = "formando_id_seq", sequenceName = "formando_id_seq", allocationSize = 1)
+	@GeneratedValue(generator = "formando_id_seq")
 	private Integer id;
 
-	@Column(name="numero_havaiana")
+	@Column(name = "numero_havaiana")
 	private String numeroHavaiana;
 
-	@ManyToOne(targetEntity=Pessoa.class, optional=false)
-	@JoinColumn(name="pessoa_id")
+	@Column(name = "quantidade_parcelas")
+	private Integer quantidadeParcelas;
+
+	@ManyToOne(targetEntity = Pessoa.class, optional = false)
+	@JoinColumn(name = "pessoa_id")
 	private Pessoa pessoa;
 
-	@ManyToOne(targetEntity=Turma.class, optional=false)
-	@JoinColumn(name="turma_id")
+	@ManyToOne(targetEntity = Turma.class, optional = false)
+	@JoinColumn(name = "turma_id")
 	private Turma turma;
 
-	@OneToOne(targetEntity=FormaPagamento.class, optional=false)
-	@JoinColumn(name="forma_pagamento_id")
-	private FormaPagamento formaPagamento;
+	@OneToOne(targetEntity = PlanoPagamento.class, optional = false)
+	@JoinColumn(name = "plano_pagamento_id")
+	private PlanoPagamento planoPagamento;
 
-	@Column(name="sequencial")
+	@Column(name = "sequencial")
 	private Integer sequencial;
 
-	@Column(name="status")
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
 	private StatusFormandoEnum status;
+
+	@Transient
+	private String situacao;
+
+	@Column(name = "valor_total")
+	private Double valorTotal;
 
 	public Formando() {
 	}
@@ -99,12 +108,35 @@ public class Formando implements Entidade {
 		this.turma = turma;
 	}
 
-	public FormaPagamento getFormaPagamento() {
-		return formaPagamento;
+	public PlanoPagamento getPlanoPagamento() {
+		return planoPagamento;
 	}
 
-	public void setFormaPagamento(FormaPagamento formaPagamento) {
-		this.formaPagamento = formaPagamento;
+	public void setPlanoPagamento(PlanoPagamento planoPagamento) {
+		this.planoPagamento = planoPagamento;
+	}
+
+	public Integer getQuantidadeParcelas() {
+		return quantidadeParcelas;
+	}
+
+	public void setQuantidadeParcelas(Integer quantidadeParcelas) {
+		this.quantidadeParcelas = quantidadeParcelas;
+	}
+
+	public Double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(Double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public String getSituacao() {
+		if (situacao == null) {
+			situacao = status.getDescricao();
+		}
+		return situacao;
 	}
 
 }

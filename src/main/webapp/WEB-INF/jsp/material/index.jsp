@@ -150,7 +150,7 @@
 							</c:if>
 							<input id="urlContext${count.index}" value="<c:url value='/material/remove/${det.id}'/>" type="hidden" />
 	                      	<a onclick="modalConfirm(${count.index})" class="ui button" data-content="Excluir" data-position="top right">
-		                        <i class="trash outline red icon"></i>
+		                        <i class="trash alternate red icon"></i>
 		                   	</a>
 						</div> 
 					</td> 

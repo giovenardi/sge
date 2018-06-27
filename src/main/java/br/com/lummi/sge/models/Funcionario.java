@@ -34,6 +34,10 @@ public class Funcionario implements Entidade {
 	@JoinColumn(name="cargo_id")
 	private Cargo cargo;
 	
+	@ManyToOne
+	@JoinColumn(name="setor_id")
+	private Setor setor;
+	
 	@OneToOne(optional=false)
 	@JoinColumn(name="pessoa_id")
 	private PessoaFisica pessoa;
@@ -84,6 +88,14 @@ public class Funcionario implements Entidade {
 
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
+	}
+
+	public Setor getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
 	}
 	
 }

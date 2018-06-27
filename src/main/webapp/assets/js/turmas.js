@@ -24,6 +24,33 @@ function buscarUnidadesInstituicao() {
 	}
 }
 
+function buscarNiveis() {
+	$('.ui.dropdown.nivel').api('set loading');
+	var formURL = baseUrl + "instituicao/buscarNiveis";
+	var idInstituicao = $('#instituicaoTurma').val();
+	var dados = {
+		"instituicao.id" : idInstituicao,
+		"tipo" : $('#projetoTurmaTipo').val()
+	};
+	clearSemanticDropDown("nivel", 'Selecione');
+	if (idInstituicao != "") {
+		$.ajax({
+			url : formURL,
+			type : "POST",
+			data : dados,
+			success : function(json) {
+				if (typeof json.list != 'undefined') {
+					adicionarNiveis(json.list);
+				}
+				$('.ui.dropdown.nivel').api('remove loading');
+
+			}
+		});
+	} else {
+		$('.ui.dropdown.nivel').api('remove loading');
+	}
+}
+
 function removerTurma() {
 	if (idRemove != "") {
 		var turma = {
@@ -55,8 +82,16 @@ function adicionarUnidades(lista) {
 	})
 }
 
+function adicionarNiveis(lista) {
+	$.each(lista, function(chave, nivel) {
+		$(".ui.dropdown.nivel .menu").append(
+				"<div class='item' data-value='" + nivel.valor + "'>" + nivel.descricao	+ "</div>");
+	})
+}
+
 $(".ui.dropdown.instituicaoTurma").on('change', function() {
 	buscarUnidadesInstituicao();
+	buscarNiveis();
 });
 
 $("#formTurma").on('inclusao:ok', function(event, json) {
@@ -81,7 +116,7 @@ function montarTRTurma(obj) {
 	tr 	+= 	"	<td>";
     tr 	+= 	"		<input id=\"urlContext"+obj.id+"\" value=\"/sge/turma/excluir\" hidden=\"true\">";
     tr 	+= 	"		<a onclick=\"modalConfirmAjax("+obj.id+", removerTurma)\" class=\"ui button icon\" data-content=\"Excluir\" data-position=\"top right\">";
-    tr 	+= 	"			<i class=\"erase outline red icon\"></i>";
+    tr 	+= 	"			<i class=\"erase alternate red icon\"></i>";
     tr 	+= 	"		</a>";
     tr 	+= 	"	</td>";
 	tr 	+= 	" </tr>";
@@ -89,8 +124,11 @@ function montarTRTurma(obj) {
 }
 
 $('#novaTurma').on("click", function(evt){
+	var projetoTurmaId = $("#projetoTurmaId").val();
+	var projetoTurmaTipo = $("#projetoTurmaTipo").val();
     $("#formTurma").form('clear');
-    $("#projetoTurmaId").val($("#projeto_id").val());
+    $("#projetoTurmaId").val(projetoTurmaId);
+    $("#projetoTurmaTipo").val(projetoTurmaTipo);
     $(".pencilEdicao, .pencilNovo").remove();
 	$("#tituloTurma").remove();
 	$("<i class='glyphicon glyphicon-education pencilNovo'></i><span id='tituloTurma'></span>")
@@ -101,4 +139,8 @@ $('#novaTurma').on("click", function(evt){
 	$("#modalTurma").modal("setting", "closable", false).modal("setting", "transition", 'vertical flip').modal('show');
 	$('#btnConfirmTurma').off('click');
 	$('#btnConfirmTurma').click(function() {return submeterFormAjax('formTurma', 'inclusao:ok')});
+	$('.FORMATURA_SUPERIOR').hide();
+	$('.FORMATURA_FUNDAMENTAL_MEDIO').hide();
+	$('.'+projetoTurmaTipo).show();
+
 });

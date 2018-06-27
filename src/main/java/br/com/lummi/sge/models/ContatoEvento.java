@@ -10,96 +10,118 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import br.com.lummi.sge.enums.NivelEnum;
 import br.com.lummi.sge.enums.SemestreEnum;
 import br.com.lummi.sge.enums.StatusEventoEnum;
 import br.com.lummi.sge.enums.TipoIndicacaoEnum;
 import br.com.lummi.sge.enums.TipoProjetoEnum;
-
 
 /**
  * The persistent class for the contato_evento database table.
  * 
  */
 @Entity
-@Table(name="contato_evento")
+@Table(name = "contato_evento")
 public class ContatoEvento implements Entidade {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="contato_evento_id_seq", sequenceName="contato_evento_id_seq", allocationSize=1)
-	@GeneratedValue(generator="contato_evento_id_seq")
+	@SequenceGenerator(name = "contato_evento_id_seq", sequenceName = "contato_evento_id_seq", allocationSize = 1)
+	@GeneratedValue(generator = "contato_evento_id_seq")
 	private Integer id;
 
 	private String celular;
 
 	@ManyToOne
-	@JoinColumn(name="curso_id")
+	@JoinColumn(name = "curso_id")
 	private Curso curso;
 
 	private String email;
 
 	@ManyToOne
-	@JoinColumn(name="forma_captacao_id")
+	@JoinColumn(name = "forma_captacao_id")
 	private FormaCaptacao formaCaptacao;
 
-	@Column(name="houve_indicacao")
+	@Column(name = "houve_indicacao")
 	private boolean houveIndicacao;
 
 	@ManyToOne
-	@JoinColumn(name="instituicao_id")
-	private Instituicao instituicao;
+	@JoinColumn(name = "unidade_instituicao_id")
+	private UnidadeInstituicao unidadeInstituicao;
 
-	@Column(name="modo_descoberta")
+	@Column(name = "modo_descoberta")
 	private String modoDescoberta;
 
-	@Column(name="nome")
+	@Column(name = "nome")
 	private String nome;
 
-	@Column(name="nome_projeto")
+	@Column(name = "nome_projeto")
 	private String nomeProjeto;
 
+	@Column(name = "semestre")
 	@Enumerated(EnumType.ORDINAL)
 	private SemestreEnum semestre;
 
+	@Column(name = "ano")
 	private Integer ano;
 
+	@Column(name = "telefone")
 	private String telefone;
 
-	@Column(name="tipo_indicacao")
+	@Column(name = "numero_turma")
+	private Integer numeroTurma;
+
+	@ManyToOne
+	@JoinColumn(name = "turno_id")
+	private Turno turno;
+
+	@Column(name = "tipo_indicacao")
 	@Enumerated(EnumType.STRING)
 	private TipoIndicacaoEnum tipoIndicacao;
 
-	@Column(name="tipo_projeto")
+	@Column(name = "tipo_projeto")
 	@Enumerated(EnumType.STRING)
 	private TipoProjetoEnum tipoProjeto;
-	
-	@Column(name="status")
+
+	@Column(name = "status")
 	@Enumerated(EnumType.STRING)
 	private StatusEventoEnum status;
 
-	@Column(name="observacao")
+	@Column(name = "observacao")
 	private String observacao;
 
+	@Column(name = "nivel")
+	@Enumerated(EnumType.STRING)
+	private NivelEnum nivel;
+
 	@ManyToOne
-	@JoinColumn(name="projeto_bonificacao_id")
+	@JoinColumn(name = "projeto_bonificacao_id")
 	private Projeto projetoBonificacao;
 
 	@ManyToOne
-	@JoinColumn(name="primeiro_contato_id")
+	@JoinColumn(name = "primeiro_contato_id")
 	private Usuario primeiroContato;
 
 	@ManyToOne
-	@JoinColumn(name="captador_bonificacao_id")
+	@JoinColumn(name = "captador_bonificacao_id")
 	private CaptadorExterno captadorBonificacao;
 
 	@ManyToOne
-	@JoinColumn(name="funcionario_bonificacao_id")
+	@JoinColumn(name = "funcionario_bonificacao_id")
 	private Funcionario funcionarioBonificacao;
 
 	@ManyToOne
-	@JoinColumn(name="funcionario_comissao_id")
+	@JoinColumn(name = "funcionario_comissao_id")
 	private Funcionario funcionarioComissao;
+
+	@Transient
+	private Funcionario gerente;
+
+	@ManyToOne
+	@JoinColumn(name = "vendedor_id")
+	private Funcionario vendedor;
 
 	public ContatoEvento() {
 	}
@@ -166,14 +188,6 @@ public class ContatoEvento implements Entidade {
 
 	public void setFormaCaptacao(FormaCaptacao formaCaptacao) {
 		this.formaCaptacao = formaCaptacao;
-	}
-
-	public Instituicao getInstituicao() {
-		return instituicao;
-	}
-
-	public void setInstituicao(Instituicao instituicao) {
-		this.instituicao = instituicao;
 	}
 
 	public String getTelefone() {
@@ -278,6 +292,54 @@ public class ContatoEvento implements Entidade {
 
 	public void setPrimeiroContato(Usuario primeiroContato) {
 		this.primeiroContato = primeiroContato;
+	}
+
+	public Funcionario getVendedor() {
+		return vendedor;
+	}
+
+	public void setVendedor(Funcionario vendedor) {
+		this.vendedor = vendedor;
+	}
+
+	public Funcionario getGerente() {
+		return gerente;
+	}
+
+	public void setGerente(Funcionario gerente) {
+		this.gerente = gerente;
+	}
+
+	public UnidadeInstituicao getUnidadeInstituicao() {
+		return unidadeInstituicao;
+	}
+
+	public void setUnidadeInstituicao(UnidadeInstituicao unidadeInstituicao) {
+		this.unidadeInstituicao = unidadeInstituicao;
+	}
+
+	public Integer getNumeroTurma() {
+		return numeroTurma;
+	}
+
+	public void setNumeroTurma(Integer numeroTurma) {
+		this.numeroTurma = numeroTurma;
+	}
+
+	public Turno getTurno() {
+		return turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+
+	public NivelEnum getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(NivelEnum nivel) {
+		this.nivel = nivel;
 	}
 
 }
