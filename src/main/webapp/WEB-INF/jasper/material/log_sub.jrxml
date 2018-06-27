@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2017-01-20T09:15:44 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="log_sub" pageWidth="555" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="550e8245-d71e-46cd-a95d-3577655c8ac5">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="ColoredField">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($F{coluna}.toString().equalsIgnoreCase("Documentos"))]]></conditionExpression>
+			<style mode="Opaque" backcolor="#DBDBDB"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="atual" class="java.lang.String">
+		<fieldDescription><![CDATA[atual]]></fieldDescription>
+	</field>
+	<field name="coluna" class="java.lang.String">
+		<fieldDescription><![CDATA[coluna]]></fieldDescription>
+	</field>
+	<field name="anterior" class="java.lang.String">
+		<fieldDescription><![CDATA[anterior]]></fieldDescription>
+	</field>
+	<columnHeader>
+		<band height="16" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="1" y="1" width="199" height="15" forecolor="#190101" backcolor="#DBDBDB" uuid="f828fbd8-f4c1-4401-90e5-4ccca0d7f43b"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<topPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<leftPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<bottomPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<rightPen lineWidth="1.0" lineColor="#EEEEEE"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Campo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="200" y="1" width="160" height="15" forecolor="#190101" backcolor="#DBDBDB" uuid="ecdbe93a-2509-4ac2-a8ab-33ec5b9b8a72"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<topPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<leftPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<bottomPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<rightPen lineWidth="1.0" lineColor="#EEEEEE"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Valor Anterior]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="360" y="1" width="194" height="15" forecolor="#190101" backcolor="#DBDBDB" uuid="b111ba27-95f3-4fc4-8eb1-bf6cf9d12d3a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<topPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<leftPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<bottomPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<rightPen lineWidth="1.0" lineColor="#EEEEEE"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Valor Atual]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="ColoredField" stretchType="RelativeToTallestObject" x="200" y="0" width="160" height="15" uuid="da4f830e-ef6c-4c8d-994e-c84ea2d0a982">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anterior}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="ColoredField" stretchType="RelativeToTallestObject" x="360" y="0" width="195" height="15" uuid="82f3f22a-0fea-4759-a3dd-ce55cc3cfb07">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{atual}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement style="ColoredField" stretchType="RelativeToTallestObject" x="0" y="0" width="200" height="15" uuid="3d3280e8-c0f6-4341-92c9-d0fd45c47998">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="styled">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{coluna}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

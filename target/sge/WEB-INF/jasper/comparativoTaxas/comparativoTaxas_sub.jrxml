@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.0.final using JasperReports Library version 6.3.0  -->
+<!-- 2017-03-20T14:14:45 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="comparativoGrupos_sub" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="986d7231-b870-4c97-b860-36c2390866f4">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="quantidadeAtualFormatado" class="java.lang.String">
+		<fieldDescription><![CDATA[quantidadeAtualFormatado]]></fieldDescription>
+	</field>
+	<field name="codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[codigo]]></fieldDescription>
+	</field>
+	<field name="quantidadeAnterior" class="java.lang.Long">
+		<fieldDescription><![CDATA[quantidadeAnterior]]></fieldDescription>
+	</field>
+	<field name="valorAtual" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorAtual]]></fieldDescription>
+	</field>
+	<field name="especificacao" class="java.lang.String">
+		<fieldDescription><![CDATA[especificacao]]></fieldDescription>
+	</field>
+	<field name="quantidadeAnteriorFormatado" class="java.lang.String">
+		<fieldDescription><![CDATA[quantidadeAnteriorFormatado]]></fieldDescription>
+	</field>
+	<field name="valorAnteriorFormatado" class="java.lang.String">
+		<fieldDescription><![CDATA[valorAnteriorFormatado]]></fieldDescription>
+	</field>
+	<field name="valorAnterior" class="java.lang.Double">
+		<fieldDescription><![CDATA[valorAnterior]]></fieldDescription>
+	</field>
+	<field name="valorAtualFormatado" class="java.lang.String">
+		<fieldDescription><![CDATA[valorAtualFormatado]]></fieldDescription>
+	</field>
+	<field name="percentual" class="java.lang.String">
+		<fieldDescription><![CDATA[percentual]]></fieldDescription>
+	</field>
+	<field name="quantidadeAtual" class="java.lang.Long">
+		<fieldDescription><![CDATA[quantidadeAtual]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="diferencaQuantidade" class="java.lang.String">
+		<fieldDescription><![CDATA[diferencaQuantidade]]></fieldDescription>
+	</field>
+	<field name="diferencaValor" class="java.lang.String">
+		<fieldDescription><![CDATA[diferencaValor]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="0" y="0" width="60" height="15" forecolor="#555755" backcolor="#FFFFFF" uuid="b05bf4d9-7c97-4f1e-b7e4-40bc7118bd6b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="632" y="0" width="110" height="15" forecolor="#555755" backcolor="#FDFAEA" uuid="a0fe69bd-cd0e-4a52-8214-01e474ea2d3d">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diferencaValor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="461" y="0" width="111" height="15" forecolor="#555755" backcolor="#CBE7BF" uuid="a68bf878-b7c7-4322-892b-01adc354917a">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorAtualFormatado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="290" y="0" width="111" height="15" forecolor="#555755" backcolor="#E7F4E2" uuid="3a219d0f-307e-42b9-9bb5-3599ce363bff">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valorAnteriorFormatado}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="572" y="0" width="60" height="15" forecolor="#555755" backcolor="#FDFAEA" uuid="bc0e9617-3c4f-4460-8a95-94312046e124">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diferencaQuantidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="401" y="0" width="60" height="15" forecolor="#555755" backcolor="#CBE7BF" uuid="e65640af-a1ab-4d89-a79e-3596048a26f5">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidadeAtualFormatado}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement mode="Opaque" x="60" y="0" width="170" height="15" forecolor="#555755" backcolor="#FFFFFF" uuid="e1fc3a60-adff-47af-a575-8a2b54cd3b36">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{especificacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="742" y="0" width="60" height="15" forecolor="#555755" backcolor="#FDFAEA" uuid="296f00ba-221d-4538-8a4d-01ee4c870dd2">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{percentual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToTallestObject" mode="Opaque" x="230" y="0" width="60" height="15" forecolor="#555755" backcolor="#E7F4E2" uuid="01fcc523-a706-4e78-8d4e-734f8ca3c085">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box bottomPadding="0">
+					<pen lineWidth="1.0" lineColor="#000000"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidadeAnteriorFormatado}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="0" y="15" width="555" height="1" forecolor="#EDE8E8" uuid="78505787-21f8-4bf8-b9f5-bd470bb6a73a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

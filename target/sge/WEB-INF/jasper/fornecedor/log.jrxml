@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-02-16T16:27:52 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Log" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="26ee7ac3-83c4-4d9b-a972-5e4b4f0fc9ec">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="diretorio_base" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="usuario" class="java.lang.String"/>
+	<parameter name="descricao" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="entidadeAnterior" class="br.gov.ce.detran.sgd.models.Entidade">
+		<fieldDescription><![CDATA[entidadeAnterior]]></fieldDescription>
+	</field>
+	<field name="ipOrigem" class="java.lang.String">
+		<fieldDescription><![CDATA[ipOrigem]]></fieldDescription>
+	</field>
+	<field name="estadoAnterior" class="java.lang.String">
+		<fieldDescription><![CDATA[estadoAnterior]]></fieldDescription>
+	</field>
+	<field name="itensLog" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource">
+		<fieldDescription><![CDATA[itensLog]]></fieldDescription>
+	</field>
+	<field name="informacoesExtras" class="java.lang.String">
+		<fieldDescription><![CDATA[informacoesExtras]]></fieldDescription>
+	</field>
+	<field name="objectType" class="java.lang.String">
+		<fieldDescription><![CDATA[objectType]]></fieldDescription>
+	</field>
+	<field name="createdAt" class="java.util.Date">
+		<fieldDescription><![CDATA[createdAt]]></fieldDescription>
+	</field>
+	<field name="entidadeAtual" class="br.gov.ce.detran.sgd.models.Entidade">
+		<fieldDescription><![CDATA[entidadeAtual]]></fieldDescription>
+	</field>
+	<field name="estadoAtual" class="java.lang.String">
+		<fieldDescription><![CDATA[estadoAtual]]></fieldDescription>
+	</field>
+	<field name="usuario" class="br.gov.ce.detran.sgd.models.autenticacao.Usuario">
+		<fieldDescription><![CDATA[usuario]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="acao" class="br.gov.ce.detran.sgd.enums.AcaoEnum">
+		<fieldDescription><![CDATA[acao]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="objectId" class="java.lang.Integer">
+		<fieldDescription><![CDATA[objectId]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="131" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="113" width="110" height="18" uuid="72514894-2978-417c-af84-563cc4d3e485">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<paragraph lineSpacing="AtLeast"/>
+				</textElement>
+				<text><![CDATA[Nome / Razão Social:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="113" width="435" height="18" uuid="03b7bf87-068a-4b0e-9743-147e53737606"/>
+				<textFieldExpression><![CDATA[$P{descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="136" y="36" width="299" height="26" uuid="aadbbcfd-8ee0-410a-8867-96765c18b64c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Log do Fornecedor]]></text>
+			</staticText>
+			<image hAlign="Right" onErrorType="Blank">
+				<reportElement positionType="FixRelativeToBottom" x="1" y="37" width="135" height="45" uuid="3f5ab436-5916-4330-9238-384e07cc1c94">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{diretorio_base} + "/WEB-INF/jasper/logos_detran/img_0_0_2"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="130" y="0" width="298" height="20" uuid="4c1a53e4-0d7e-45c4-847b-2f046d15b9f0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="SansSerif" size="10" isBold="false" isStrikeThrough="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[SGD - Sistema de Gestão do Detran]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="23" width="555" height="1" uuid="d5302d0d-2150-440a-a076-55f3e5770a1b"/>
+			</line>
+			<image onErrorType="Blank">
+				<reportElement x="504" y="31" width="53" height="50" uuid="6a7f0ad5-54e7-4c09-93b0-9e18100d1d5c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{diretorio_base} + "/WEB-INF/jasper/logos_detran/img_0_0_3"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="51" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="215" height="15" forecolor="#190101" backcolor="#DBDBDB" uuid="5b425195-0e2a-41fa-9f14-4c61a277b60e">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{itensLog}.getRecordCount() > 0]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<topPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<leftPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<bottomPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<rightPen lineWidth="1.0" lineColor="#EEEEEE"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Usuário]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="215" y="0" width="130" height="15" forecolor="#190101" backcolor="#DBDBDB" uuid="eee1d3b2-b462-44b2-8071-e28df0a30cb7">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{itensLog}.getRecordCount() > 0]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<topPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<leftPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<bottomPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<rightPen lineWidth="1.0" lineColor="#EEEEEE"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Ação]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="345" y="0" width="210" height="15" forecolor="#190101" backcolor="#DBDBDB" uuid="8d181009-21dd-43e1-abcc-1ed2763f4746">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{itensLog}.getRecordCount() > 0]]></printWhenExpression>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<topPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<leftPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<bottomPen lineWidth="1.0" lineColor="#EEEEEE"/>
+					<rightPen lineWidth="1.0" lineColor="#EEEEEE"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<text><![CDATA[Data / Hora]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="15" width="215" height="15" uuid="f2669531-2763-41c4-abcd-14e7a521142c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{itensLog}.getRecordCount() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{usuario}.getNomeParaRelatorio()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="215" y="15" width="130" height="15" uuid="74ee0315-9853-4483-8a30-cf6e56ed89f9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{itensLog}.getRecordCount() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acao}.getDescricao()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="345" y="15" width="210" height="15" uuid="02301e7f-2fe0-40ae-97f7-7627e0784329">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{itensLog}.getRecordCount() > 0]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format($F{createdAt})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="30" width="553" height="21" uuid="b3795d76-59ad-4ec9-8790-82bdb71cdfeb">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{itensLog}.getRecordCount() == 0]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nenhum registro encontrado.]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<subreport>
+				<reportElement x="1" y="1" width="554" height="19" uuid="e9b638d1-9c5b-4c3f-9109-489882e36d4f"/>
+				<dataSourceExpression><![CDATA[$F{itensLog}]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+"/log_sub.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="298" y="0" width="16" height="14" uuid="2da34c22-c160-429b-8202-b3c1517a4a3c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="286" y="0" width="13" height="14" uuid="fb13826c-f848-47f8-982c-dbf8535a7162"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[de]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="272" y="0" width="15" height="14" uuid="28b1deb4-9a0c-462c-a13b-f046d97e3763"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="239" y="0" width="34" height="14" uuid="b3b55484-2bf5-49a8-ad01-8a59f28efa6b"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Página]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy - HH:mm">
+				<reportElement x="0" y="0" width="121" height="14" uuid="a8b5f51b-031b-4c70-be26-9d1113f6b8f7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="341" y="0" width="214" height="14" uuid="191fcef7-8116-47ef-a7fa-656d649c9215">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Usuário: " + $P{usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
