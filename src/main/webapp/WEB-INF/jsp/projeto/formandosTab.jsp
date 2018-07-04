@@ -18,6 +18,8 @@
                         <i class="trash alternate red icon"></i>
                       </a>
 						<a class="ui button" onclick="editarFormando(${formando.id})" data-content="Alterar"> 
+                        <i class="pencil alternate blue icon"></i>
+                      </a>
 					</td>
 				</tr>
 			</c:forEach>

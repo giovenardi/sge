@@ -34,7 +34,7 @@
 						</div>
 					</div>
 					<div class="fields separador">
-						<div class="twelve wide field required">
+						<div class="twelve wide field">
 							<label>Plano de Pagamento</label>
 							<div class="ui selection dropdown planoPagamentoFormando">
 								<input name="formando.planoPagamento.id"

@@ -10,7 +10,6 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.view.Results;
 import br.com.lummi.sge.models.MembroComissao;
-import br.com.lummi.sge.models.Turma;
 import br.com.lummi.sge.models.transiente.RetornoJson;
 import br.com.lummi.sge.service.ComissaoFormaturaService;
 import br.com.lummi.sge.service.FuncaoComissaoService;
@@ -74,7 +73,7 @@ public class MembroComissaoController {
 	@Path("/excluir")
 	@Transactional
 	public void excluir(MembroComissao membroComissao) {
-		RetornoJson<Turma> retornoJson = new RetornoJson<Turma>();
+		RetornoJson<MembroComissao> retornoJson = new RetornoJson<MembroComissao>();
 		try {
 			membroComissao = service.getById(membroComissao.getId());
 			service.delete(membroComissao);

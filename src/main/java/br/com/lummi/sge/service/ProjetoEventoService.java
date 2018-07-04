@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import br.com.lummi.sge.daos.GenericDao;
 import br.com.lummi.sge.daos.ProjetoEventoDao;
 import br.com.lummi.sge.exceptions.SgeException;
-import br.com.lummi.sge.models.Evento;
 import br.com.lummi.sge.models.Projeto;
 import br.com.lummi.sge.models.ProjetoEvento;
 import br.com.lummi.sge.models.ProjetoFormaturaSuperior;
@@ -23,7 +22,6 @@ public class ProjetoEventoService extends AbstractLogService<ProjetoEvento> {
 
 	@Override
 	public ProjetoEvento create(ProjetoEvento projetoEvento) {
-		projetoEvento.setEvento(dao.getEntityManager().find(Evento.class, projetoEvento.getEvento().getId()));
 		projetoEvento.setProjeto(dao.getEntityManager().find(Projeto.class, projetoEvento.getProjeto().getId()));
 		return dao.save(projetoEvento);
 	}
@@ -52,6 +50,14 @@ public class ProjetoEventoService extends AbstractLogService<ProjetoEvento> {
 	@Override
 	protected void preencherItensLog(List<ItemLog> itensLog, ProjetoEvento anterior, ProjetoEvento atual) {
 
+	}
+
+	/**
+	 * @param projetoEvento
+	 * @return
+	 */
+	public boolean verificarEventoDuplicado(ProjetoEvento projetoEvento) {
+		return dao.verificarEventoDuplicado(projetoEvento);
 	}
 
 }

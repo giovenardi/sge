@@ -29,4 +29,5 @@ public class Mensagens {
 	public static final String MSG_FORMATO_SENHA = "Use pelo menos 8 caracteres e combine letras, números e/ou símbolos.";
 	public static final String MSG_EMAIL_NAO_CADASTRADO = "Não existe email cadastrado. Favor entrar em contato com o suporte.";
 	public static final String MSG_NOME_DUPLICADO = "{0} com nome duplicado.";
+	public static final String MSG_EVENTO_DUPLICADO = "Evento {0} já existe para este projeto.";
 }

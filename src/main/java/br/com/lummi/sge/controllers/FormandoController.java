@@ -42,17 +42,18 @@ public class FormandoController {
 	@Transactional
 	public void salvar(Formando formando) {
 		RetornoJson<Formando> retornoJson = new RetornoJson<Formando>();
+		formando.setPessoa(pessoaService.getById(formando.getPessoa().getId()));
+		formando.setTurma(turmaService.getById(formando.getTurma().getId()));
+		if (formando.getPlanoPagamento() != null && formando.getPlanoPagamento().getId() != null) {
+			formando.setPlanoPagamento(planoPagamentoService.getById(formando.getPlanoPagamento().getId()));
+		} else {
+			formando.setPlanoPagamento(null);
+		}
 		if (formando.getId() == null) {
 			formando.setStatus(StatusFormandoEnum.EM_ABERTO);
 			formando = service.create(formando);
 		} else {
 			formando = service.update(formando);
-		}
-		formando.setPessoa(pessoaService.getById(formando.getPessoa().getId()));
-		formando.setTurma(turmaService.getById(formando.getTurma().getId()));
-		if (formando.getPlanoPagamento() != null && formando.getPlanoPagamento().getId() != null) {
-			formando.setPlanoPagamento(planoPagamentoService.getById(formando.getPlanoPagamento().getId()));
-
 		}
 		retornoJson.setSuccess(Mensagens.MSG_EDICAO_OK);
 		retornoJson.setObj(formando);
@@ -71,6 +72,22 @@ public class FormandoController {
 		} else {
 			formando.getSituacao();
 			retornoJson.setObj(formando);
+		}
+		result.use(Results.json()).from(retornoJson)
+				.include("?obj", "?obj.turma", "?obj.planoPagamento", "?obj.pessoa", "?obj.situacao").serialize();
+	}
+
+	@Post
+	@Path("/excluir")
+	@Transactional
+	public void excluir(Formando formando) {
+		RetornoJson<Formando> retornoJson = new RetornoJson<Formando>();
+		try {
+			formando = service.getById(formando.getId());
+			service.delete(formando);
+			retornoJson.setSuccess(Mensagens.MSG_EXCLUSAO_OK);
+		} catch (Exception e) {
+			retornoJson.setError(e.getMessage());
 		}
 		result.use(Results.json()).from(retornoJson)
 				.include("?obj", "?obj.turma", "?obj.planoPagamento", "?obj.pessoa", "?obj.situacao").serialize();

@@ -27,13 +27,13 @@
 						</div>
 					</div>
 					<div class="fields separador">
-						<div class="four datetime wide field required">
+						<div class="eight datetime wide field required">
 							<label>Início</label>
 							<input type="text" class="campo-form datetime" name="projetoEvento.inicio" value='<fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${projetoEvento.inicio}" />'>
 						</div>
 					</div>
 					<div class="fields separador">
-						<div class="four datetime wide field required">
+						<div class="eight datetime wide field required">
 							<label>Final</label>
 							<input type="text" class="campo-form datetime" name="projetoEvento.fim" value='<fmt:formatDate pattern="dd/MM/yyyy HH:mm" value="${projetoEvento.fim}" />'>
 						</div>

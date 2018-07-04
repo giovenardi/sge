@@ -4,7 +4,7 @@ function removerFormando() {
 			"formando.id" : idRemove
 		};
 		$.ajax({
-			url : $("#urlContext"+idRemove).val(),
+			url : $("#urlContextFormando"+idRemove).val(),
 			type : "POST",
 			data : formando,
 			success : function(json) {

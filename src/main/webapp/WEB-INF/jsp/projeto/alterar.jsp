@@ -48,7 +48,7 @@
 						<input name="projeto.status" type="hidden" value="${projeto.status.name()}" />
 						<input type="text" disabled value="${projeto.status.descricao}" />
 					</div>
-	 			<div class="three wide field">
+	 			<div class="four wide field">
 					<label>Gerente</label>
 					<input type="text" disabled value="${projeto.gerente.pessoa.nome}" />
 				</div>

@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -80,6 +81,7 @@ public class Projeto implements Entidade {
 	private List<ProgramacaoFinanceiraProjeto> programacoesFinanceiras;
 
 	@OneToMany(targetEntity = ProjetoEvento.class, mappedBy = "projeto")
+	@OrderBy("inicio ASC")
 	private List<ProjetoEvento> eventos;
 
 	public Integer getId() {

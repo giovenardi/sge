@@ -40,7 +40,7 @@ public class Formando implements Entidade {
 	@JoinColumn(name = "turma_id")
 	private Turma turma;
 
-	@OneToOne(targetEntity = PlanoPagamento.class, optional = false)
+	@OneToOne(targetEntity = PlanoPagamento.class, optional = true)
 	@JoinColumn(name = "plano_pagamento_id")
 	private PlanoPagamento planoPagamento;
 

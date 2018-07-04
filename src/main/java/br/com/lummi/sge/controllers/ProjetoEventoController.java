@@ -1,5 +1,6 @@
 package br.com.lummi.sge.controllers;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ import br.com.lummi.sge.exceptions.SgeValidationException;
 import br.com.lummi.sge.models.Projeto;
 import br.com.lummi.sge.models.ProjetoEvento;
 import br.com.lummi.sge.models.transiente.RetornoJson;
+import br.com.lummi.sge.service.EventoService;
 import br.com.lummi.sge.service.ProjetoEventoService;
 import br.com.lummi.sge.utils.Mensagens;
 
@@ -27,6 +29,9 @@ public class ProjetoEventoController {
 
 	@Inject
 	private Result result;
+
+	@Inject
+	private EventoService eventoService;
 
 	@Post
 	@Path("/listar/{idProjeto}")
@@ -85,6 +90,11 @@ public class ProjetoEventoController {
 				|| projetoEvento.getInicio() == null
 				|| projetoEvento.getFim() == null) {
 			throw new SgeValidationException(Mensagens.MSG_CAMPOS_OBRIGATORIOS);
+		}
+		projetoEvento.setEvento(eventoService.getById(projetoEvento.getEvento().getId()));
+		if (service.verificarEventoDuplicado(projetoEvento)) {
+			throw new SgeValidationException(
+					MessageFormat.format(Mensagens.MSG_EVENTO_DUPLICADO, projetoEvento.getEvento().getNome()));
 		}
 	}
 
