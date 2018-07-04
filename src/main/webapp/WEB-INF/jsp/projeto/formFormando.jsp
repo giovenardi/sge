@@ -59,7 +59,7 @@
 						</div>
 					</div>
 					<div class="fields">
-						<div class="four wide field required">
+						<div class="four wide field">
 							<label>Valor Total</label> <input type="text"
 								id="maskedValorTotalFormando" class="campo-form dinheiro"
 								value='<fmt:formatNumber value="${formando.valor}" type="currency"></fmt:formatNumber>'>
